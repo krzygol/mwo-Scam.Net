@@ -1,23 +1,23 @@
 package org.example.model;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import java.util.Date;
+
+
+
+@Getter
+@AllArgsConstructor
 public class Task {
-    private String user;
-    private String client;
+
+
+
+    private String name;
     private String project;
-    private String taskName;
-    private double hoursSpent;
+    private double duration;
+    private String owner;
+    private Date date;
 
-    public Task(String user, String client, String project, String taskName, double hoursSpent) {
-        this.user = user;
-        this.client = client;
-        this.project = project;
-        this.taskName = taskName;
-        this.hoursSpent = hoursSpent;
-    }
-
-    public String getUser() { return user; }
-    public String getClient() { return client; }
-    public String getProject() { return project; }
-    public String getTaskName() { return taskName; }
-    public double getHoursSpent() { return hoursSpent; }
 }
