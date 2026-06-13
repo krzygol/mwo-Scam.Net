@@ -7,31 +7,36 @@ import java.util.*;
 
 public class Report3UsersAllProjects extends Report {
 
-    public Report3UsersAllProjects(DataModel data) {
+    private final String userID;
+
+    public Report3UsersAllProjects(DataModel data, String userID) {
         super(data);
+        this.userID = userID;
     }
 
     @Override
     public String getTitle() {
-        return "Hours per user per project";
+        return "Report 3: All projects for user: " + userID;
     }
 
     @Override
     public String generate() {
-        Map<String, Map<String, Double>> userProjectHours = new TreeMap<>();
+        Map<String, Double> taskMap = new HashMap<>();
 
         for (Task task : tasks) {
-            userProjectHours
-                    .computeIfAbsent(task.getUser(), k -> new TreeMap<>())
-                    .merge(task.getProject(), task.getHoursSpent(), Double::sum);
+            if (task.getUser().equals(userID)) {
+                taskMap.merge(task.getName(), task.getDuration(), Double::sum);
+            }
+        }
+
+        if (taskMap.isEmpty()) {
+            return "No data available for user: " + userID;
         }
 
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, Map<String, Double>> userEntry : userProjectHours.entrySet()) {
-            sb.append(userEntry.getKey()).append(":\n");
-            for (Map.Entry<String, Double> projectEntry : userEntry.getValue().entrySet()) {
-                sb.append(String.format("  %-28s %.2f h%n", projectEntry.getKey(), projectEntry.getValue()));
-            }
+        sb.append(userID).append(":\n");
+        for (Map.Entry<String, Double> entry : taskMap.entrySet()) {
+            sb.append(String.format("  %-28s %.2f h%n", entry.getKey(), entry.getValue()));
         }
         return sb.toString();
     }
