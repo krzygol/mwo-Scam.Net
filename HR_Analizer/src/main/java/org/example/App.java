@@ -6,6 +6,7 @@ import org.example.display.PrintReport2SumAllProjects;
 import org.example.display.model.Report1SumAllUsersRow;
 import org.example.display.model.Report2SumAllProjectsRow;
 import org.example.model.DataModel;
+import org.example.orchestrator.Orchestrator;
 import org.example.reader.ReaderXLSX;
 
 import java.nio.file.Path;
@@ -18,8 +19,16 @@ public class App {
 
         Path path = Path.of("reporter-dane");
 
+
         ReaderXLSX reader = new ReaderXLSX();
         DataModel data = reader.importAll(path);
+
+
+
+        Orchestrator orchestrator = new Orchestrator(data);
+        orchestrator.controller();
+
+
 
 
 
