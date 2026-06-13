@@ -1,6 +1,17 @@
 package org.example.report;
 
-public interface Report {
-    String getTitle();
-    String generate();
+import org.example.model.DataModel;
+import org.example.model.Task;
+
+import java.util.List;
+
+public abstract class Report {
+    protected final List<Task> tasks;
+
+    protected Report(DataModel data) {
+        this.tasks = data.getTasks();
+    }
+
+    public abstract String getTitle();
+    public abstract String generate();
 }

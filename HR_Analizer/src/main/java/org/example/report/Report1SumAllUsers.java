@@ -6,11 +6,10 @@ import org.example.model.Task;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Report1SumAllUsers implements Report {
-    private final DataModel data;
+public class Report1SumAllUsers extends Report {
 
     public Report1SumAllUsers(DataModel data) {
-        this.data = data;
+        super(data);
     }
 
     @Override
@@ -22,7 +21,7 @@ public class Report1SumAllUsers implements Report {
     public String generate() {
         Map<String, Double> sumByClient = new TreeMap<>();
 
-        for (Task task : data.getTasks()) {
+        for (Task task : tasks) {
             sumByClient.merge(task.getClient(), task.getHoursSpent(), Double::sum);
         }
 

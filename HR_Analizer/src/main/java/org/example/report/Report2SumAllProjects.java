@@ -6,11 +6,10 @@ import org.example.model.Task;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Report2SumAllProjects implements Report {
-    private final DataModel data;
+public class Report2SumAllProjects extends Report {
 
     public Report2SumAllProjects(DataModel data) {
-        this.data = data;
+        super(data);
     }
 
     @Override
@@ -22,7 +21,7 @@ public class Report2SumAllProjects implements Report {
     public String generate() {
         Map<String, Double> sumByProject = new TreeMap<>();
 
-        for (Task task : data.getTasks()) {
+        for (Task task : tasks) {
             sumByProject.merge(task.getProject(), task.getHoursSpent(), Double::sum);
         }
 

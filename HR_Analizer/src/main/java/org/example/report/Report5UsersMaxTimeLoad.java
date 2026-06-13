@@ -5,11 +5,10 @@ import org.example.model.Task;
 
 import java.util.*;
 
-public class Report5UsersMaxTimeLoad implements Report {
-    private final DataModel data;
+public class Report5UsersMaxTimeLoad extends Report {
 
     public Report5UsersMaxTimeLoad(DataModel data) {
-        this.data = data;
+        super(data);
     }
 
     @Override
@@ -21,7 +20,7 @@ public class Report5UsersMaxTimeLoad implements Report {
     public String generate() {
         Map<String, Double> totalByUser = new HashMap<>();
 
-        for (Task task : data.getTasks()) {
+        for (Task task : tasks) {
             totalByUser.merge(task.getUser(), task.getHoursSpent(), Double::sum);
         }
 

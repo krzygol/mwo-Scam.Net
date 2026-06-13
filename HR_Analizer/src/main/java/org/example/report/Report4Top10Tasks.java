@@ -6,11 +6,10 @@ import org.example.model.Task;
 import java.util.Comparator;
 import java.util.List;
 
-public class Report4Top10Tasks implements Report {
-    private final DataModel data;
+public class Report4Top10Tasks extends Report {
 
     public Report4Top10Tasks(DataModel data) {
-        this.data = data;
+        super(data);
     }
 
     @Override
@@ -20,7 +19,7 @@ public class Report4Top10Tasks implements Report {
 
     @Override
     public String generate() {
-        List<Task> top10 = data.getTasks().stream()
+        List<Task> top10 = tasks.stream()
                 .sorted(Comparator.comparingDouble(Task::getHoursSpent).reversed())
                 .limit(10)
                 .toList();

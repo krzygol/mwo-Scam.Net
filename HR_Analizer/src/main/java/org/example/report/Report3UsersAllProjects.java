@@ -5,11 +5,10 @@ import org.example.model.Task;
 
 import java.util.*;
 
-public class Report3UsersAllProjects implements Report {
-    private final DataModel data;
+public class Report3UsersAllProjects extends Report {
 
     public Report3UsersAllProjects(DataModel data) {
-        this.data = data;
+        super(data);
     }
 
     @Override
@@ -21,7 +20,7 @@ public class Report3UsersAllProjects implements Report {
     public String generate() {
         Map<String, Map<String, Double>> userProjectHours = new TreeMap<>();
 
-        for (Task task : data.getTasks()) {
+        for (Task task : tasks) {
             userProjectHours
                     .computeIfAbsent(task.getUser(), k -> new TreeMap<>())
                     .merge(task.getProject(), task.getHoursSpent(), Double::sum);
