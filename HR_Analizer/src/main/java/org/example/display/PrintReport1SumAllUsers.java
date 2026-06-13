@@ -4,7 +4,7 @@ import org.example.display.model.Report1SumAllUsersRow;
 
 import java.util.List;
 
-public class Report1SumAllUsers implements Report<Report1SumAllUsersRow> {
+public class PrintReport1SumAllUsers implements PrintReport<Report1SumAllUsersRow> {
 
     @Override
     public void print(List<Report1SumAllUsersRow> rows) {
