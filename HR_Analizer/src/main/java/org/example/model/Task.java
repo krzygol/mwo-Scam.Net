@@ -18,7 +18,7 @@ public class Task {
     private String name;
     private String project;
     private double duration;
-    private String owner;
+    private String user;
     private Date date;
 
 }
