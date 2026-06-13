@@ -34,6 +34,7 @@ public class Report3UsersAllProjects extends Report {
         }
 
         StringBuilder sb = new StringBuilder();
+        sb.append(getTitle());
         sb.append(userID).append(":\n");
         for (Map.Entry<String, Double> entry : taskMap.entrySet()) {
             sb.append(String.format("  %-28s %.2f h%n", entry.getKey(), entry.getValue()));
