@@ -2,6 +2,7 @@ package org.example.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -9,6 +10,7 @@ import java.util.Date;
 
 @Getter
 @AllArgsConstructor
+@ToString
 public class Task {
 
 
