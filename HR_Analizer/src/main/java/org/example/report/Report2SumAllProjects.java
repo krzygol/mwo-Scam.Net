@@ -24,7 +24,7 @@ public class Report2SumAllProjects extends Report {
         for (Task task : tasks) {
             totalByProject.merge(
                     task.getProject(),
-                    task.getHoursSpent(),
+                    task.getDuration(),
                     Double::sum
             );
         }
@@ -38,6 +38,7 @@ public class Report2SumAllProjects extends Report {
                 .toList();
 
         StringBuilder sb = new StringBuilder();
+        sb.append(getTitle()).append("\n");
 
         for (Map.Entry<String, Double> entry : sorted) {
             sb.append(String.format(
