@@ -20,7 +20,7 @@ public class Report4Top10Tasks extends Report {
     @Override
     public String generate() {
         List<Task> top10 = tasks.stream()
-                .sorted(Comparator.comparingDouble(Task::getHoursSpent).reversed())
+                .sorted(Comparator.comparingDouble(Task::getDuration).reversed())
                 .limit(10)
                 .toList();
 
@@ -28,7 +28,7 @@ public class Report4Top10Tasks extends Report {
         int rank = 1;
         for (Task task : top10) {
             sb.append(String.format("%2d. %-30s %-20s %.2f h%n",
-                    rank++, task.getTaskName(), task.getUser(), task.getHoursSpent()));
+                    rank++, task.getName(), task.getUser(), task.getDuration()));
         }
         return sb.toString();
     }
