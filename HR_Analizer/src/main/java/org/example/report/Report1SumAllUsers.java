@@ -11,6 +11,10 @@ public class Report1SumAllUsers extends Report {
         super(data);
     }
 
+    public Report1SumAllUsers(DataModel data, Date dateFrom, Date dateTo) {
+        super(data, dateFrom, dateTo);
+    }
+
     @Override
     public String getTitle() {
         return "Total hours by user";

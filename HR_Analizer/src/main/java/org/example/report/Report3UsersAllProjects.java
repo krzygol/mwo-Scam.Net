@@ -14,6 +14,11 @@ public class Report3UsersAllProjects extends Report {
         this.userID = userID;
     }
 
+    public Report3UsersAllProjects(DataModel data, String userID, Date dateFrom, Date dateTo) {
+        super(data, dateFrom, dateTo);
+        this.userID = userID;
+    }
+
     @Override
     public String getTitle() {
         return "Report 3: All projects for user: " + userID;

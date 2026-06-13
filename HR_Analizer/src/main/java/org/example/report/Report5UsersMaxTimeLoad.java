@@ -11,6 +11,10 @@ public class Report5UsersMaxTimeLoad extends Report {
         super(data);
     }
 
+    public Report5UsersMaxTimeLoad(DataModel data, Date dateFrom, Date dateTo) {
+        super(data, dateFrom, dateTo);
+    }
+
     @Override
     public String getTitle() { // Changed title to reflect the top 5 users
         return "Top 5 users with maximum time load";

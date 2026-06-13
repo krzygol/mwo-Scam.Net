@@ -11,6 +11,10 @@ public class Report2SumAllProjects extends Report {
         super(data);
     }
 
+    public Report2SumAllProjects(DataModel data, Date dateFrom, Date dateTo) {
+        super(data, dateFrom, dateTo);
+    }
+
     @Override
     public String getTitle() {
         return "Total hours by project";

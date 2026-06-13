@@ -11,6 +11,10 @@ public class Report4Top10Tasks extends Report {
         super(data);
     }
 
+    public Report4Top10Tasks(DataModel data, Date dateFrom, Date dateTo) {
+        super(data, dateFrom, dateTo);
+    }
+
     @Override
     public String getTitle() {
         return "Top 10 tasks by total time";
