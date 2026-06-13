@@ -23,7 +23,7 @@ public class Report3UsersAllProjects extends Report {
         for (Task task : tasks) {
             userProjectHours
                     .computeIfAbsent(task.getUser(), k -> new TreeMap<>())
-                    .merge(task.getProject(), task.getHoursSpent(), Double::sum);
+                    .merge(task.getProject(), task.getDuration(), Double::sum);
         }
 
         StringBuilder sb = new StringBuilder();
