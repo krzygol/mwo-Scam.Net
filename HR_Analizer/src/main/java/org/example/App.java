@@ -15,10 +15,10 @@ public class App {
 
         Displayer displayer = new Displayer();
 
-        displayer.display(new ReportSumAllClients(data));
-        displayer.display(new ReportSumAllProject(data));
-        displayer.display(new ReportTop10Task(data));
-        displayer.display(new ReportUserNlProject(data));
-        displayer.display(new ReportUserMaxTimeLoad(data));
+        displayer.display(new Report1SumAllUsers(data));
+        displayer.display(new Report2SumAllProjects(data));
+        displayer.display(new Report4Top10Tasks(data));
+        displayer.display(new Report3UsersAllProjects(data));
+        displayer.display(new Report5UsersMaxTimeLoad(data));
     }
 }

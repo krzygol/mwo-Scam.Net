@@ -5,10 +5,10 @@ import org.example.model.Task;
 
 import java.util.*;
 
-public class ReportUserMaxTimeLoad implements Report {
+public class Report5UsersMaxTimeLoad implements Report {
     private final DataModel data;
 
-    public ReportUserMaxTimeLoad(DataModel data) {
+    public Report5UsersMaxTimeLoad(DataModel data) {
         this.data = data;
     }
 

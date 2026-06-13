@@ -6,10 +6,10 @@ import org.example.model.Task;
 import java.util.Comparator;
 import java.util.List;
 
-public class ReportTop10Task implements Report {
+public class Report4Top10Tasks implements Report {
     private final DataModel data;
 
-    public ReportTop10Task(DataModel data) {
+    public Report4Top10Tasks(DataModel data) {
         this.data = data;
     }
 

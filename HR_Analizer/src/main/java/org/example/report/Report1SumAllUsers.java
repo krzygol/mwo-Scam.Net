@@ -6,10 +6,10 @@ import org.example.model.Task;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ReportSumAllClients implements Report {
+public class Report1SumAllUsers implements Report {
     private final DataModel data;
 
-    public ReportSumAllClients(DataModel data) {
+    public Report1SumAllUsers(DataModel data) {
         this.data = data;
     }
 

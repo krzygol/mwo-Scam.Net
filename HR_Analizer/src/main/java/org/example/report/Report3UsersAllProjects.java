@@ -5,10 +5,10 @@ import org.example.model.Task;
 
 import java.util.*;
 
-public class ReportUserNlProject implements Report {
+public class Report3UsersAllProjects implements Report {
     private final DataModel data;
 
-    public ReportUserNlProject(DataModel data) {
+    public Report3UsersAllProjects(DataModel data) {
         this.data = data;
     }
 
