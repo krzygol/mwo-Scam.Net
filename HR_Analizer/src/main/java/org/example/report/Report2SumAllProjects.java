@@ -3,8 +3,7 @@ package org.example.report;
 import org.example.model.DataModel;
 import org.example.model.Task;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Report2SumAllProjects extends Report {
 
@@ -14,21 +13,40 @@ public class Report2SumAllProjects extends Report {
 
     @Override
     public String getTitle() {
-        return "Sum of hours per project";
+        return "Total hours by project";
     }
 
     @Override
     public String generate() {
-        Map<String, Double> sumByProject = new TreeMap<>();
+
+        Map<String, Double> totalByProject = new HashMap<>();
 
         for (Task task : tasks) {
-            sumByProject.merge(task.getProject(), task.getHoursSpent(), Double::sum);
+            totalByProject.merge(
+                    task.getProject(),
+                    task.getHoursSpent(),
+                    Double::sum
+            );
         }
 
-        StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, Double> entry : sumByProject.entrySet()) {
-            sb.append(String.format("%-30s %.2f h%n", entry.getKey(), entry.getValue()));
+        if (totalByProject.isEmpty()) {
+            return "No data available.";
         }
+
+        List<Map.Entry<String, Double>> sorted = totalByProject.entrySet().stream()
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .toList();
+
+        StringBuilder sb = new StringBuilder();
+
+        for (Map.Entry<String, Double> entry : sorted) {
+            sb.append(String.format(
+                    "%-30s %.2f h%n",
+                    entry.getKey(),
+                    entry.getValue()
+            ));
+        }
+
         return sb.toString();
     }
 }
