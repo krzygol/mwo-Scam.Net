@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.display.Displayer;
 import org.example.model.DataModel;
+import org.example.orchestrator.Orchestrator;
 import org.example.reader.ReaderXLSX;
 import org.example.report.*;
 
@@ -13,8 +14,16 @@ public class App {
 
         Path path = Path.of("reporter-dane");
 
+
         ReaderXLSX reader = new ReaderXLSX();
         DataModel data = reader.importAll(path);
+
+
+
+        Orchestrator orchestrator = new Orchestrator(data);
+        orchestrator.controller();
+
+
 
 
 
