@@ -4,10 +4,7 @@ package org.example.orchestrator;
 import lombok.AllArgsConstructor;
 import org.example.display.Displayer;
 import org.example.model.DataModel;
-import org.example.report.Report;
-import org.example.report.Report1SumAllUsers;
-import org.example.report.Report2SumAllProjects;
-import org.example.report.Report5UsersMaxTimeLoad;
+import org.example.report.*;
 
 import java.util.Scanner;
 
@@ -54,7 +51,7 @@ public class Orchestrator {
             }
             switch (line) {
                 case "Report2SumAllProjects":
-                    Report report = new Report4TopTasks(dataModel);
+                    Report report = new Report4Top10Tasks(dataModel);
                     displayer.display(report);
 
             }
