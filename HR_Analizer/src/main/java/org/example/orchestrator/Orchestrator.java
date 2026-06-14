@@ -4,9 +4,11 @@ package org.example.orchestrator;
 import lombok.AllArgsConstructor;
 import org.example.display.DisplayReport1SumAllUsers;
 import org.example.display.DisplayReport2SumAllProjects;
+import org.example.display.DisplayReport3UsersAllProjects;
 import org.example.display.Displayer;
 import org.example.display.model.Report1SumAllUsersData;
 import org.example.display.model.Report2SumAllProjectsData;
+import org.example.display.model.Report3UsersAllProjectsData;
 import org.example.model.DataModel;
 import org.example.report.*;
 
@@ -47,8 +49,11 @@ public class Orchestrator {
 
 
             case "Report3UsersAllProjects":
-                report = new Report3UsersAllProjects(dataModel, inputLoader);
-                break;
+               Report3UsersAllProjectsData reportData3 = new Report3UsersAllProjects(dataModel, inputLoader).generate();
+               Displayer<Report3UsersAllProjectsData> printer3 = new DisplayReport3UsersAllProjects();
+               printer3.display(reportData3);
+
+
 
 
             case "Report4Top10Tasks":

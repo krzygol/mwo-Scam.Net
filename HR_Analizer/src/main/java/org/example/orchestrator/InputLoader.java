@@ -46,7 +46,7 @@ public class InputLoader {
                 t = new Date(a.substring(3));
             }
             if (a.charAt(1) == 'u') {
-                u = a.substring(2);
+                u = a.substring(3);
             }
             if (a.charAt(1) == 'p') {
                 p = Path.of(a.substring(3));
