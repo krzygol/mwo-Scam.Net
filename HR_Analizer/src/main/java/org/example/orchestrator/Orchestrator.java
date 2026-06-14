@@ -33,9 +33,7 @@ public class Orchestrator {
     public void controller() {
 
         String command = inputLoader.getCommand();
-        Report report;
-
-        System.out.println("TEST PROGRAMU!!");
+        
 
 
         switch (command) {

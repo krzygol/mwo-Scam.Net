@@ -94,7 +94,7 @@ public class InputLoader {
             }
         }
 
-        return InputLoader.builder().command(c).from(f).to(t).user(u).path(p).build();
+        return InputLoader.builder().command(c).from(f).to(t).user(u+".xlsx").path(p).build();
 
     }
 
