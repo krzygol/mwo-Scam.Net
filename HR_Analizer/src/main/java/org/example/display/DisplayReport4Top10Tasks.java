@@ -25,18 +25,20 @@ public class DisplayReport4Top10Tasks
             System.out.println(period);
         }
 
+        System.out.println("User: " + report.userID().replace(".xlsx", ""));
+
         System.out.println();
 
-        System.out.printf("%-5s %-45s %15s%n",
+        System.out.printf("%-5s %-55s %15s%n",
                 "No.",
                 "Task",
                 "Hours");
 
-        System.out.println("-------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------");
 
         for (Report4Top10TasksRow row : report.rows()) {
 
-            System.out.printf("%-5d %-45s %15.2f%n",
+            System.out.printf("%-5d %-55s %15.2f%n",
                     row.rank(),
                     row.taskName(),
                     row.workingHours());
