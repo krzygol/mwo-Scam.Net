@@ -6,6 +6,7 @@ import org.example.display.PrintReport2SumAllProjects;
 import org.example.display.model.Report1SumAllUsersRow;
 import org.example.display.model.Report2SumAllProjectsRow;
 import org.example.model.DataModel;
+import org.example.orchestrator.InputLoader;
 import org.example.orchestrator.Orchestrator;
 import org.example.reader.ReaderXLSX;
 
@@ -17,15 +18,16 @@ public class App {
 
     public void run(String[] args) throws Exception {
 
-        Path path = Path.of("reporter-dane");
+//        Path path = Path.of("reporter-dane");
 
+        InputLoader inputLoader = InputLoader.create(args);
 
         ReaderXLSX reader = new ReaderXLSX();
-        DataModel data = reader.importAll(path);
+        DataModel data = reader.importAll(inputLoader.getPath());
 
 
 
-        Orchestrator orchestrator = new Orchestrator(data);
+        Orchestrator orchestrator = new Orchestrator(data, inputLoader);
         orchestrator.controller();
 
 
