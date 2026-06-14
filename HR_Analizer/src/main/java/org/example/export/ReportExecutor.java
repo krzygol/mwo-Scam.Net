@@ -1,0 +1,98 @@
+package org.example.export;
+
+import org.example.display.DisplayReport1SumAllUsers;
+import org.example.display.model.Report1SumAllUsersData;
+import org.example.display.model.Report2SumAllProjectsData;
+import org.example.model.DataModel;
+import org.example.orchestrator.InputLoader;
+import org.example.orchestrator.ReportType;
+import org.example.report.Report1SumAllUsers;
+import org.example.report.Report2SumAllProjects;
+import org.example.report.Report3UsersAllProjects;
+
+
+public class ReportExecutor {
+
+    private final ExcelFileWriter excelWriter = new ExcelFileWriter();
+
+    public void execute(ReportType type,
+                        DataModel data,
+                        InputLoader inputLoader) {
+
+        switch (type) {
+
+            case REPORT_1 -> {
+
+                Report1SumAllUsersData report =
+                        new Report1SumAllUsers(data, inputLoader).generate();
+
+                new DisplayReport1SumAllUsers().display(report);
+
+                excelWriter.write(
+                        "report1.xlsx",
+                        report,
+                        new ExcelReport1SumAllUsers()
+                );
+            }
+
+//            case REPORT_2 -> {
+//
+//                Report2SumAllProjectsData report =
+//                        new Report2SumAllProjects(data).generate();
+//
+//                new PrintReport2SumAllProjects().print(report);
+//
+//                excelWriter.write(
+//                        "report2.xlsx",
+//                        report,
+//                        new ExcelReport2SumAllProjects()
+//                );
+//            }
+//
+//            case REPORT_3 -> {
+//
+//                Report3UsersAllProjectsData report =
+//                        new Report3UsersAllProjects(
+//                                data,
+//                                inputLoader.getUserId())
+//                                .generate();
+//
+//                new PrintReport3UsersAllProjects().print(report);
+//
+//                excelWriter.write(
+//                        "report3.xlsx",
+//                        report,
+//                        new ExcelReport3UsersAllProjects()
+//                );
+//            }
+//
+//            case REPORT_4 -> {
+//
+//                Report4Top10TasksData report =
+//                        new Report4Top10Tasks(data).generate();
+//
+//                new PrintReport4Top10Tasks().print(report);
+//
+//                excelWriter.write(
+//                        "report4.xlsx",
+//                        report,
+//                        new ExcelReport4Top10Tasks()
+//                );
+//            }
+//
+//            case REPORT_5 -> {
+//
+//                Report5UsersMaxTimeLoadData report =
+//                        new Report5UsersMaxTimeLoad(data).generate();
+//
+//                new PrintReport5UsersMaxTimeLoad().print(report);
+//
+//                excelWriter.write(
+//                        "report5.xlsx",
+//                        report,
+//                        new ExcelReport5UsersMaxTimeLoad()
+//                );
+//            }
+        }
+    }
+}

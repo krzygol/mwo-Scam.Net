@@ -19,7 +19,7 @@ public class App {
 
 
         Orchestrator orchestrator = new Orchestrator(data, inputLoader);
-        orchestrator.selectReportAndExecute();
+        orchestrator.controller();
 
 
 

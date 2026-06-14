@@ -1,10 +1,21 @@
 package org.example.orchestrator;
 
 
+import lombok.AllArgsConstructor;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.example.display.*;
 import org.example.display.model.*;
+import org.example.export.ExcelReport1SumAllUsers;
+import org.example.export.ReportExecutor;
 import org.example.model.DataModel;
 import org.example.report.*;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+import static org.example.orchestrator.ReportType.REPORT_1;
 
 public class Orchestrator {
 
@@ -18,7 +29,7 @@ public class Orchestrator {
     }
 
 
-    public void selectReportAndExecute() {
+    public void controller() {
 
         String command = inputLoader.getCommand();
         Report report;
@@ -27,10 +38,12 @@ public class Orchestrator {
 
 
         switch (command) {
-            case "Report1SumAllUsers":
-                Report1SumAllUsersData reportData1 = new Report1SumAllUsers(dataModel, inputLoader).generate();
-                Displayer<Report1SumAllUsersData> printer1 = new DisplayReport1SumAllUsers();
-                printer1.display(reportData1);
+            case "Raport1SumAllUser":
+                new ReportExecutor().execute(
+                        REPORT_1,
+                        dataModel,
+                        inputLoader
+                );
                 break;
 
             case "Report2SumAllProjects":
