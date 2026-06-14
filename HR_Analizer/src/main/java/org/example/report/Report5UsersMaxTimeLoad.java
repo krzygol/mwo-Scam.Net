@@ -4,21 +4,25 @@ import org.example.display.model.Report5UsersMaxTimeLoadData;
 import org.example.display.model.Report5UsersMaxTimeLoadRow;
 import org.example.model.DataModel;
 import org.example.model.Task;
+import org.example.orchestrator.InputLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Report5UsersMaxTimeLoad
         extends Report<Report5UsersMaxTimeLoadData> {
 
     private DataModel data;
+    InputLoader inputLoader;
 
-    public Report5UsersMaxTimeLoad(DataModel data) {
-        super(data);
-        this.data = data;
-    }
+//    public Report5UsersMaxTimeLoad(DataModel data) {
+//        super(data);
+//        this.data = data;
+//    }
 
-    public Report5UsersMaxTimeLoad(DataModel data, Date dateFrom, Date dateTo) {
-        super(data, dateFrom, dateTo);
+    public Report5UsersMaxTimeLoad(DataModel data, InputLoader inputLoader) {
+        super(data, inputLoader);
+        this.inputLoader = inputLoader;
     }
 
     @Override
@@ -68,8 +72,10 @@ public class Report5UsersMaxTimeLoad
         }
 
         return new Report5UsersMaxTimeLoadData(
-                "2026-06-01",     // dateFrom
-                "2026-06-30",
+                new SimpleDateFormat("yyyy-mm-dd")
+                        .format(inputLoader.getFrom()),
+                new SimpleDateFormat("yyyy-mm-dd")
+                        .format(inputLoader.getTo()),       // dateTo
                 rows
         );
     }

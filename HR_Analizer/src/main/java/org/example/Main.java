@@ -19,12 +19,12 @@ public class Main {
                 Paths.get("reporter-dane")
         );
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date dateFrom = sdf.parse("2012-01-01");
-        Date dateTo   = sdf.parse("2012-01-15");
-
-        Report1SumAllUsers report =
-                new Report1SumAllUsers(data, dateFrom, dateTo);
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date dateFrom = sdf.parse("2012-01-01");
+//        Date dateTo   = sdf.parse("2012-01-15");
+//
+//        Report1SumAllUsers report =
+//                new Report1SumAllUsers(data, dateFrom, dateTo);
 
 //        new Displayer().display(report);
         App app= new App();

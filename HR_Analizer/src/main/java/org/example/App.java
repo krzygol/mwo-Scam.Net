@@ -1,10 +1,5 @@
 package org.example;
 
-import org.example.display.PrintReport;
-import org.example.display.PrintReport1SumAllUsers;
-import org.example.display.PrintReport2SumAllProjects;
-import org.example.display.model.Report1SumAllUsersRow;
-import org.example.display.model.Report2SumAllProjectsRow;
 import org.example.model.DataModel;
 import org.example.orchestrator.InputLoader;
 import org.example.orchestrator.Orchestrator;
@@ -18,7 +13,7 @@ public class App {
 
     public void run(String[] args) throws Exception {
 
-//        Path path = Path.of("reporter-dane");
+        //        Path path = Path.of("reporter-dane");
 
         InputLoader inputLoader = InputLoader.create(args);
 
@@ -32,9 +27,6 @@ public class App {
 
 
 
-
-
-
 //        Displayer displayer = new Displayer();
 //
 //        displayer.display(new Report1SumAllUsers(data));
@@ -44,24 +36,24 @@ public class App {
 //        displayer.display(new Report5UsersMaxTimeLoad(data));
 
 
-        List<Report1SumAllUsersRow> report1List = List.of(
-                new Report1SumAllUsersRow("Jan Kowalski", 50),
-                new Report1SumAllUsersRow("Tomasz Nankaniec", 120)
-        );
-
-        PrintReport<Report1SumAllUsersRow> report1 = new PrintReport1SumAllUsers();
-
-        report1.print(report1List);
-
-
-        List<Report2SumAllProjectsRow> report2List = List.of(
-                new Report2SumAllProjectsRow("Projekt pierwszy", 50),
-                new Report2SumAllProjectsRow("Projekt drugi", 120)
-        );
-
-        PrintReport<Report2SumAllProjectsRow> report2 = new PrintReport2SumAllProjects();
-
-        report2.print(report2List);
+//        List<Report1SumAllUsersRow> report1List = List.of(
+//                new Report1SumAllUsersRow("Jan Kowalski", 50),
+//                new Report1SumAllUsersRow("Tomasz Nankaniec", 120)
+//        );
+//
+//        PrintReport<Report1SumAllUsersRow> report1 = new PrintReport1SumAllUsers();
+//
+//        report1.print(report1List);
+//
+//
+//        List<Report2SumAllProjectsRow> report2List = List.of(
+//                new Report2SumAllProjectsRow("Projekt pierwszy", 50),
+//                new Report2SumAllProjectsRow("Projekt drugi", 120)
+//        );
+//
+//        PrintReport<Report2SumAllProjectsRow> report2 = new PrintReport2SumAllProjects();
+//
+//        report2.print(report2List);
 
 
     }

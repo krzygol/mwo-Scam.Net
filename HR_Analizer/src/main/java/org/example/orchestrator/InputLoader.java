@@ -40,16 +40,16 @@ public class InputLoader {
         for (String a : arglist) {
 
             if (a.charAt(1) == 'f') {
-                f = new Date(a.substring(2));
+                f = new Date(a.substring(3));
             }
             if (a.charAt(1) == 't') {
-                t = new Date(a.substring(2));
+                t = new Date(a.substring(3));
             }
             if (a.charAt(1) == 'u') {
                 u = a.substring(2);
             }
             if (a.charAt(1) == 'p') {
-                p = Path.of(a.substring(2));
+                p = Path.of(a.substring(3));
             }
 
         }

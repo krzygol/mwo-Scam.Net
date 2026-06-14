@@ -4,7 +4,9 @@ import org.example.display.model.Report3UsersAllProjectsData;
 import org.example.display.model.Report3UsersAllProjectsRow;
 import org.example.model.DataModel;
 import org.example.model.Task;
+import org.example.orchestrator.InputLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Report3UsersAllProjects
@@ -12,16 +14,18 @@ public class Report3UsersAllProjects
 
     private DataModel data;
     private final String userID;
+    InputLoader inputLoader;
 
-    public Report3UsersAllProjects(DataModel data, String userID) {
-        super(data);
-        this.data = data;
-        this.userID = userID;
-    }
+//    public Report3UsersAllProjects(DataModel data, String userID) {
+//        super(data);
+//        this.data = data;
+//        this.userID = userID;
+//    }
 
-    public Report3UsersAllProjects(DataModel data, String userID, Date dateFrom, Date dateTo) {
-        super(data, dateFrom, dateTo);
-        this.userID = userID;
+    public Report3UsersAllProjects(DataModel data, InputLoader inputLoader) {
+        super(data, inputLoader);
+        this.userID = inputLoader.getUser();
+        this.inputLoader = inputLoader;
     }
 
     @Override
@@ -66,8 +70,10 @@ public class Report3UsersAllProjects
                 });
 
         return new Report3UsersAllProjectsData(
-                "2026-06-01",     // dateFrom
-                "2026-06-30",              // dateTo
+                new SimpleDateFormat("yyyy-mm-dd")
+                        .format(inputLoader.getFrom()),
+                new SimpleDateFormat("yyyy-mm-dd")
+                        .format(inputLoader.getTo()),       // dateTo
                 userID,
                 rows
         );
