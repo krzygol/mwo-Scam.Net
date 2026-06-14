@@ -75,7 +75,7 @@ public class Report5UsersMaxTimeLoad
                 new SimpleDateFormat("yyyy-mm-dd")
                         .format(inputLoader.getFrom()),
                 new SimpleDateFormat("yyyy-mm-dd")
-                        .format(inputLoader.getTo()),       // dateTo
+                        .format(inputLoader.getTo()),
                 rows
         );
     }

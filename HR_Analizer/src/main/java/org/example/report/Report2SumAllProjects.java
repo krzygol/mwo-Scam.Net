@@ -15,11 +15,6 @@ public class Report2SumAllProjects
     private DataModel data;
     InputLoader inputLoader;
 
-//    public Report2SumAllProjects(DataModel data) {
-//        super(data);
-//        this.data = data;
-//    }
-
     public Report2SumAllProjects(DataModel data, InputLoader inputLoader) {
         super(data, inputLoader);
         this.inputLoader = inputLoader;

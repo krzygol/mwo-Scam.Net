@@ -57,7 +57,7 @@ public class InputLoader {
             }
 
             char flag = a.charAt(1);
-            String value = a.substring(2);
+            String value = a.substring(3);
 
             switch (flag) {
                 case 'f':

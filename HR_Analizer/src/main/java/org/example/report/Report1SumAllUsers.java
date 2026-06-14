@@ -14,10 +14,6 @@ public class Report1SumAllUsers
 
     InputLoader inputLoader;
 
-//    public Report1SumAllUsers(DataModel data) {
-//        super(data);
-//    }
-
     public Report1SumAllUsers(DataModel data, InputLoader inputLoader) {
         super(data, inputLoader);
         this.inputLoader = inputLoader;

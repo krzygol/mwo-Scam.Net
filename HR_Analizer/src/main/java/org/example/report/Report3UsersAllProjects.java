@@ -16,12 +16,6 @@ public class Report3UsersAllProjects
     private final String userID;
     InputLoader inputLoader;
 
-//    public Report3UsersAllProjects(DataModel data, String userID) {
-//        super(data);
-//        this.data = data;
-//        this.userID = userID;
-//    }
-
     public Report3UsersAllProjects(DataModel data, InputLoader inputLoader) {
         super(data, inputLoader);
         this.userID = inputLoader.getUser();
@@ -73,7 +67,7 @@ public class Report3UsersAllProjects
                 new SimpleDateFormat("yyyy-mm-dd")
                         .format(inputLoader.getFrom()),
                 new SimpleDateFormat("yyyy-mm-dd")
-                        .format(inputLoader.getTo()),       // dateTo
+                        .format(inputLoader.getTo()),
                 userID,
                 rows
         );
