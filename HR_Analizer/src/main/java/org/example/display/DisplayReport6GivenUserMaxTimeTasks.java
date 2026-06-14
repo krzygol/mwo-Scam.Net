@@ -26,20 +26,20 @@ public class DisplayReport6GivenUserMaxTimeTasks
         }
 
         if (report.userName() != null) {
-            System.out.println("User: " + report.userName());
+            System.out.println("User: " + report.userName().replace(".xlsx", ""));
         }
 
         System.out.println();
 
-        System.out.printf("%-5s %-40s %15s%n",
+        System.out.printf("%-5s %-55s %15s%n",
                 "No.",
                 "Task",
                 "Hours");
 
-        System.out.println("------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------");
 
         for (Report6GivenUserMaxTimeTasksRow row : report.rows()) {
-            System.out.printf("%-5d %-40s %15.2f%n",
+            System.out.printf("%-5d %-55s %15.2f%n",
                     row.rank(),
                     row.taskName(),
                     row.workingHours());

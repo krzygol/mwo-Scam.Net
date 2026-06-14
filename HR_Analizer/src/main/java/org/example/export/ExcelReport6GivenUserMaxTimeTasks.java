@@ -47,7 +47,7 @@ public class ExcelReport6GivenUserMaxTimeTasks
         if (report.userName() != null) {
             row = sheet.createRow(rowNum++);
             row.createCell(0).setCellValue("User:");
-            row.createCell(1).setCellValue(report.userName());
+            row.createCell(1).setCellValue(report.userName().replaceFirst("\\.xlsx$", ""));
         }
 
         rowNum++;
