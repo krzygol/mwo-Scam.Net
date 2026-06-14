@@ -73,7 +73,7 @@ public class InputLoader {
                     }
                     break;
                 case 'x':
-                    if (value.equals("x")) {
+                    if (value.equals("yes")) {
                         x = true;
                         break;
                     }
