@@ -32,10 +32,10 @@ public class InputLoader {
         sdf.setLenient(false);
 
         String c = null;
-//        Date f = sdf.parse("2000-01-01");
-//        Date t = sdf.parse("2050-01-01");
-        Date f = null;
-        Date t = null;
+        Date f = sdf.parse("2000-05-01");
+        Date t = sdf.parse("2050-01-01");
+//        Date f = null;
+//        Date t = null;
         String u = null;
         Path p = null;
 

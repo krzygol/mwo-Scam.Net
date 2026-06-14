@@ -19,13 +19,7 @@ public class App {
 
 
         Orchestrator orchestrator = new Orchestrator(data, inputLoader);
-        if (inputLoader.getFrom() == null) {
-            inputLoader.setFrom(data.getMinDate());
-        }
 
-        if (inputLoader.getTo() == null) {
-            inputLoader.setTo(data.getMaxDate());
-        }
         orchestrator.controller();
 
 
