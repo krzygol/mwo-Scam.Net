@@ -9,28 +9,28 @@ public class DisplayReport4Top10Tasks
     @Override
     public void display(Report4Top10TasksData report) {
 
-        System.out.println("===== TOP 10 ZADAŃ W PROJEKTACH =====");
+        System.out.println("===== REPORT 4: TOP 10 TASKS IN PROJECTS =====");
 
-        StringBuilder period = new StringBuilder("Raport obejmuje");
+        StringBuilder period = new StringBuilder("Report covers");
 
         if (report.dateFrom() != null && !report.dateFrom().isBlank()) {
-            period.append(" od: ").append(report.dateFrom());
+            period.append(" from: ").append(report.dateFrom());
         }
 
         if (report.dateTo() != null && !report.dateTo().isBlank()) {
-            period.append(" do: ").append(report.dateTo());
+            period.append(" to: ").append(report.dateTo());
         }
 
-        if (!period.toString().equals("Raport obejmuje")) {
+        if (!period.toString().equals("Report covers")) {
             System.out.println(period);
         }
 
         System.out.println();
 
         System.out.printf("%-5s %-45s %15s%n",
-                "Lp.",
-                "Zadanie",
-                "Godziny");
+                "No.",
+                "Task",
+                "Hours");
 
         System.out.println("-------------------------------------------------------------------");
 
@@ -43,7 +43,7 @@ public class DisplayReport4Top10Tasks
         }
 
         if (report.rows().isEmpty()) {
-            System.out.println("Brak danych.");
+            System.out.println("No data.");
         }
     }
 }

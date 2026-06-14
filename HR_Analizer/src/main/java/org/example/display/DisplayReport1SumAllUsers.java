@@ -9,27 +9,27 @@ public class DisplayReport1SumAllUsers
     @Override
     public void display(Report1SumAllUsersData report) {
 
-        System.out.println("===== RAPORT PRACY WSZYSTKICH PRACOWNIKÓW =====");
+        System.out.println("===== REPORT 1: WORK SUMMARY ALL EMPLOYEES =====");
 
-        StringBuilder period = new StringBuilder("Raport obejmuje");
+        StringBuilder period = new StringBuilder("Report covers");
 
         if (report.dateFrom() != null && !report.dateFrom().isBlank()) {
-            period.append(" od: ").append(report.dateFrom());
+            period.append(" from: ").append(report.dateFrom());
         }
 
         if (report.dateTo() != null && !report.dateTo().isBlank()) {
-            period.append(" do: ").append(report.dateTo());
+            period.append(" to: ").append(report.dateTo());
         }
 
-        if (!period.toString().equals("Raport obejmuje")) {
+        if (!period.toString().equals("Report covers")) {
             System.out.println(period);
         }
 
         System.out.println();
 
         System.out.printf("%-20s %20s%n",
-                "Imię i Nazwisko",
-                "Liczba godzin");
+                "Full Name",
+                "Hours");
 
         System.out.println("-----------------------------------------");
 
@@ -40,7 +40,7 @@ public class DisplayReport1SumAllUsers
         }
 
         if (report.rows().isEmpty()) {
-            System.out.println("Brak danych.");
+            System.out.println("No data.");
         }
     }
 }

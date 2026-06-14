@@ -9,29 +9,29 @@ public class DisplayReport3UsersAllProjects
     @Override
     public void display(Report3UsersAllProjectsData report) {
 
-        System.out.println("===== RAPORT PROJEKTÓW UŻYTKOWNIKA =====");
+        System.out.println("===== REPORT 3: USER PROJECTS BREAKDOWN =====");
 
-        StringBuilder period = new StringBuilder("Raport obejmuje");
+        StringBuilder period = new StringBuilder("Report covers");
 
         if (report.dateFrom() != null && !report.dateFrom().isBlank()) {
-            period.append(" od: ").append(report.dateFrom());
+            period.append(" from: ").append(report.dateFrom());
         }
 
         if (report.dateTo() != null && !report.dateTo().isBlank()) {
-            period.append(" do: ").append(report.dateTo());
+            period.append(" to: ").append(report.dateTo());
         }
 
-        if (!period.toString().equals("Raport obejmuje")) {
+        if (!period.toString().equals("Report covers")) {
             System.out.println(period);
         }
 
-        System.out.println("Użytkownik: " + report.userID());
+        System.out.println("User: " + report.userID());
         System.out.println();
 
         System.out.printf("%-20s %15s %15s%n",
-                "Projekt",
-                "Godziny",
-                "Udział");
+                "Project",
+                "Hours",
+                "Share");
 
         System.out.println("----------------------------------------------------");
 
@@ -44,7 +44,7 @@ public class DisplayReport3UsersAllProjects
         }
 
         if (report.rows().isEmpty()) {
-            System.out.println("Brak danych.");
+            System.out.println("No data.");
         }
     }
 }

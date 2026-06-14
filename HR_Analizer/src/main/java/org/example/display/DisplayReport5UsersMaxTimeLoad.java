@@ -9,28 +9,28 @@ public class DisplayReport5UsersMaxTimeLoad
     @Override
     public void display(Report5UsersMaxTimeLoadData report) {
 
-        System.out.println("===== TOP 5 UŻYTKOWNIKÓW W PROJEKTACH =====");
+        System.out.println("===== REPORT 5: TOP 5 EMPLOYEES IN PROJECTS =====");
 
-        StringBuilder period = new StringBuilder("Raport obejmuje");
+        StringBuilder period = new StringBuilder("Report covers");
 
         if (report.dateFrom() != null && !report.dateFrom().isBlank()) {
-            period.append(" od: ").append(report.dateFrom());
+            period.append(" from: ").append(report.dateFrom());
         }
 
         if (report.dateTo() != null && !report.dateTo().isBlank()) {
-            period.append(" do: ").append(report.dateTo());
+            period.append(" to: ").append(report.dateTo());
         }
 
-        if (!period.toString().equals("Raport obejmuje")) {
+        if (!period.toString().equals("Report covers")) {
             System.out.println(period);
         }
 
         System.out.println();
 
         System.out.printf("%-5s %-30s %15s%n",
-                "Lp.",
-                "Użytkownik",
-                "Godziny");
+                "No.",
+                "Employee",
+                "Hours");
 
         System.out.println("----------------------------------------------------");
 
@@ -43,7 +43,7 @@ public class DisplayReport5UsersMaxTimeLoad
         }
 
         if (report.rows().isEmpty()) {
-            System.out.println("Brak danych.");
+            System.out.println("No data.");
         }
     }
 }

@@ -3,6 +3,8 @@ package org.example.orchestrator;
 
 import lombok.AllArgsConstructor;
 import org.example.display.*;
+import org.example.report.Report0Metadata;
+import org.example.display.model.Report0MetadataData;
 import org.example.display.model.Report1SumAllUsersData;
 import org.example.display.model.Report2SumAllProjectsData;
 import org.example.display.model.Report3UsersAllProjectsData;
@@ -33,6 +35,12 @@ public class Orchestrator {
 
 
         switch (command) {
+            case "Report0Metadata":
+                Report0MetadataData reportData0 = new Report0Metadata(dataModel, inputLoader).generate();
+                Displayer<Report0MetadataData> printer0 = new DisplayReport0Metadata();
+                printer0.display(reportData0);
+                break;
+
             case "Raport1SumAllUser":
                 Report1SumAllUsersData reportData1 = new Report1SumAllUsers(dataModel, inputLoader).generate();
                 Displayer<Report1SumAllUsersData> printer1 = new DisplayReport1SumAllUsers();
