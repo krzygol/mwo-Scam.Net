@@ -4,18 +4,23 @@ import org.example.display.model.Report1SumAllUsersData;
 import org.example.display.model.Report1SumAllUsersRow;
 import org.example.model.DataModel;
 import org.example.model.Task;
+import org.example.orchestrator.InputLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Report1SumAllUsers
         extends Report<Report1SumAllUsersData> {
 
-    public Report1SumAllUsers(DataModel data) {
-        super(data);
-    }
+    InputLoader inputLoader;
 
-    public Report1SumAllUsers(DataModel data, Date dateFrom, Date dateTo) {
-        super(data, dateFrom, dateTo);
+//    public Report1SumAllUsers(DataModel data) {
+//        super(data);
+//    }
+
+    public Report1SumAllUsers(DataModel data, InputLoader inputLoader) {
+        super(data, inputLoader);
+        this.inputLoader = inputLoader;
     }
 
     @Override
@@ -45,8 +50,10 @@ public class Report1SumAllUsers
                 );
 
         return new Report1SumAllUsersData(
-                "2026-06-01",     // dateFrom
-                "2026-06-30",              // dateTo
+                new SimpleDateFormat("yyyy-mm-dd")
+                        .format(inputLoader.getFrom()),
+                new SimpleDateFormat("yyyy-mm-dd")
+                        .format(inputLoader.getTo()),
                 rows
         );
     }

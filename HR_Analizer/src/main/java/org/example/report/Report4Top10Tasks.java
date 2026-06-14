@@ -4,21 +4,25 @@ import org.example.display.model.Report4Top10TasksData;
 import org.example.display.model.Report4Top10TasksRow;
 import org.example.model.DataModel;
 import org.example.model.Task;
+import org.example.orchestrator.InputLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Report4Top10Tasks
         extends Report<Report4Top10TasksData> {
 
     private DataModel data;
+    InputLoader inputLoader;
 
-    public Report4Top10Tasks(DataModel data) {
-        super(data);
-    }
+//    public Report4Top10Tasks(DataModel data) {
+//        super(data);
+//    }
 
-    public Report4Top10Tasks(DataModel data, Date dateFrom, Date dateTo) {
-        super(data, dateFrom, dateTo);
+    public Report4Top10Tasks(DataModel data, InputLoader inputLoader) {
+        super(data, inputLoader);
         this.data = data;
+        this.inputLoader = inputLoader;
     }
 
     @Override
@@ -53,8 +57,10 @@ public class Report4Top10Tasks
         }
 
         return new Report4Top10TasksData(
-                "2026-06-01",     // dateFrom
-                "2026-06-30",
+                new SimpleDateFormat("yyyy-mm-dd")
+                        .format(inputLoader.getFrom()),
+                new SimpleDateFormat("yyyy-mm-dd")
+                        .format(inputLoader.getTo()),       // dateTo
                 rows
         );
     }
