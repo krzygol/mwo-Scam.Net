@@ -12,16 +12,12 @@ import java.util.*;
 public class Report4Top10Tasks
         extends Report<Report4Top10TasksData> {
 
-    private DataModel data;
-    InputLoader inputLoader;
-
-//    public Report4Top10Tasks(DataModel data) {
-//        super(data);
-//    }
+    private final String projectID;
+    private final InputLoader inputLoader;
 
     public Report4Top10Tasks(DataModel data, InputLoader inputLoader) {
         super(data, inputLoader);
-        this.data = data;
+        this.projectID = inputLoader.getProject();
         this.inputLoader = inputLoader;
     }
 
@@ -31,30 +27,33 @@ public class Report4Top10Tasks
         Map<String, Double> totalByTask = new HashMap<>();
 
         for (Task task : tasks) {
-            totalByTask.merge(
-                    task.getName(),
-                    task.getDuration(),
-                    Double::sum
-            );
+
+            if (task.getProject().equals(projectID)) {
+
+                totalByTask.merge(
+                        task.getName(),
+                        task.getDuration(),
+                        Double::sum
+                );
+            }
         }
 
         List<Report4Top10TasksRow> rows = new ArrayList<>();
 
         int rank = 1;
 
-        for (Map.Entry<String, Double> entry : totalByTask.entrySet().stream()
+        totalByTask.entrySet().stream()
                 .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
                 .limit(10)
-                .toList()) {
-
-            rows.add(
-                    new Report4Top10TasksRow(
-                            rank++,
-                            entry.getKey(),
-                            entry.getValue()
-                    )
-            );
-        }
+                .forEach(entry ->
+                        rows.add(
+                                new Report4Top10TasksRow(
+                                        rank + rows.size(),
+                                        entry.getKey(),
+                                        entry.getValue()
+                                )
+                        )
+                );
 
         return new Report4Top10TasksData(
                 new SimpleDateFormat("yyyy-MM-dd")

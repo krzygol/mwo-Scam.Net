@@ -26,11 +26,13 @@ public class ReportExecutor {
 
                 new DisplayReport1SumAllUsers().display(report);
 
-                excelWriter.write(
-                        "report1.xlsx",
-                        report,
-                        new ExcelReport1SumAllUsers()
-                );
+                if(inputLoader.getPrint()) {
+                    excelWriter.write(
+                            "report1.xlsx",
+                            report,
+                            new ExcelReport1SumAllUsers()
+                    );
+                }
             }
 
             case REPORT_2 -> {
@@ -40,11 +42,13 @@ public class ReportExecutor {
 
                 new DisplayReport2SumAllProjects().display(report);
 
-                excelWriter.write(
-                        "report2.xlsx",
-                        report,
-                        new ExcelReport2SumAllProjects()
-                );
+                if(inputLoader.getPrint()) {
+                    excelWriter.write(
+                            "report2.xlsx",
+                            report,
+                            new ExcelReport2SumAllProjects()
+                    );
+                }
             }
 
             case REPORT_3 -> {
@@ -54,11 +58,13 @@ public class ReportExecutor {
 
                 new DisplayReport3UsersAllProjects().display(report);
 
-                excelWriter.write(
-                        "report3.xlsx",
-                        report,
-                        new ExcelReport3UsersAllProjects()
-                );
+                if(inputLoader.getPrint()) {
+                    excelWriter.write(
+                            "report3.xlsx",
+                            report,
+                            new ExcelReport3UsersAllProjects()
+                    );
+                }
             }
 
             case REPORT_4 -> {
@@ -68,11 +74,13 @@ public class ReportExecutor {
 
                 new DisplayReport4Top10Tasks().display(report);
 
-                excelWriter.write(
-                        "report4.xlsx",
-                        report,
-                        new ExcelReport4Top10Tasks()
-                );
+                if(inputLoader.getPrint()) {
+                    excelWriter.write(
+                            "report4.xlsx",
+                            report,
+                            new ExcelReport4Top10Tasks()
+                    );
+                }
             }
 
             case REPORT_5 -> {
@@ -82,11 +90,13 @@ public class ReportExecutor {
 
                 new DisplayReport5UsersMaxTimeLoad().display(report);
 
-                excelWriter.write(
-                        "report5.xlsx",
-                        report,
-                        new ExcelReport5UsersMaxTimeLoad()
-                );
+                if(inputLoader.getPrint()) {
+                    excelWriter.write(
+                            "report5.xlsx",
+                            report,
+                            new ExcelReport5UsersMaxTimeLoad()
+                    );
+                }
             }
 
             case REPORT_6 -> {

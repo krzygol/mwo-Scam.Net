@@ -22,7 +22,14 @@ class Report4Top10TasksTest {
                 Path.of("reporter-dane")
         );
 
+        assertFalse(data.getTasks().isEmpty());
+
+        String project = data.getTasks()
+                .get(0)
+                .getProject();
+
         InputLoader inputLoader = InputLoader.builder()
+                .project(project)
                 .from(new Date(0))
                 .to(new Date())
                 .build();

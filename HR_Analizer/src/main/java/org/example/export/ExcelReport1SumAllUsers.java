@@ -105,7 +105,9 @@ public class ExcelReport1SumAllUsers
             row = sheet.createRow(rowNum++);
 
             row.createCell(0)
-                    .setCellValue(dataRow.userName());
+                    .setCellValue(
+                            dataRow.userName().replaceFirst("\\.xlsx$", "")
+                    );
 
             Cell hoursCell = row.createCell(1);
             hoursCell.setCellValue(dataRow.workingHours());
