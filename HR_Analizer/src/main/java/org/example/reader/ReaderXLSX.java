@@ -1,10 +1,12 @@
 package org.example.reader;
 
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.example.model.DataModel;
 import org.example.model.Task;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,6 +19,15 @@ public class ReaderXLSX {
 
 
     public DataModel importAll(Path root) throws Exception {
+        if (root == null) {
+            throw new IllegalArgumentException("Directory path cannot be null. Use the -p flag.");
+        }
+        if (!Files.exists(root)) {
+            throw new IllegalArgumentException("Path does not exist: " + root);
+        }
+        if (!Files.isDirectory(root)) {
+            throw new IllegalArgumentException("Path is not a directory: " + root);
+        }
 
         DataModel model = new DataModel();
 
@@ -76,6 +87,21 @@ public class ReaderXLSX {
 
                     if (dateCell == null || nameCell == null || durationCell == null) {
                         continue;
+                    }
+
+                    int rowNum = row.getRowNum() + 1;
+
+                    if (!DateUtil.isCellDateFormatted(dateCell)) {
+                        throw new IllegalStateException(
+                            "Column 'date' (A) in sheet '" + project + "', row " + rowNum + " does not contain a date. Value: " + formatter.formatCellValue(dateCell));
+                    }
+                    if (nameCell.getCellType() != CellType.STRING) {
+                        throw new IllegalStateException(
+                            "Column 'name' (B) in sheet '" + project + "', row " + rowNum + " does not contain text. Value: " + formatter.formatCellValue(nameCell));
+                    }
+                    if (durationCell.getCellType() != CellType.NUMERIC) {
+                        throw new IllegalStateException(
+                            "Column 'duration' (C) in sheet '" + project + "', row " + rowNum + " does not contain a number. Value: " + formatter.formatCellValue(durationCell));
                     }
 
                     Date date = dateCell.getDateCellValue();
