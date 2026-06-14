@@ -35,7 +35,7 @@ public class DisplayReport1SumAllUsers
 
         for (Report1SumAllUsersRow row : report.rows()) {
             System.out.printf("%-20s %20.2f%n",
-                    row.userName(),
+                    row.userName().replaceFirst("\\.xlsx$", ""),
                     row.workingHours());
         }
 
