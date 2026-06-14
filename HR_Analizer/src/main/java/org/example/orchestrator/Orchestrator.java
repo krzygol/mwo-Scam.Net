@@ -58,16 +58,18 @@ public class Orchestrator {
                         dataModel,
                         inputLoader
                 );
-
-//                Report3UsersAllProjectsData reportData3 = new Report3UsersAllProjects(dataModel, inputLoader).generate();
-//                Displayer<Report3UsersAllProjectsData> printer3 = new DisplayReport3UsersAllProjects();
-//                printer3.display(reportData3);
                 break;
 
             case "Report4Top10Tasks":
-                Report4Top10TasksData reportData4 = new Report4Top10Tasks(dataModel, inputLoader).generate();
-                Displayer<Report4Top10TasksData> printer4 = new DisplayReport4Top10Tasks();
-                printer4.display(reportData4);
+                new ReportExecutor().execute(
+                        REPORT_4,
+                        dataModel,
+                        inputLoader
+                );
+
+//                Report4Top10TasksData reportData4 = new Report4Top10Tasks(dataModel, inputLoader).generate();
+//                Displayer<Report4Top10TasksData> printer4 = new DisplayReport4Top10Tasks();
+//                printer4.display(reportData4);
                 break;
 
             case "Report5UsersMaxTimeLoad":
