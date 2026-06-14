@@ -25,7 +25,8 @@ public class DisplayReport3UsersAllProjects
             System.out.println(period);
         }
 
-        System.out.println("User: " + report.userID());
+        System.out.println("User: " + report.userID().replace(".xlsx", ""));
+
         System.out.println();
 
         System.out.printf("%-20s %15s %15s%n",
