@@ -22,40 +22,16 @@ public class App {
 //        if (inputLoader.getFrom() == null) {
 //            inputLoader.setFrom(data.getMinDate());
 //        }
+//
 //        if (inputLoader.getTo() == null) {
 //            inputLoader.setTo(data.getMaxDate());
 //        }
 
+
         orchestrator.controller();
 
 
-//        Displayer displayer = new Displayer();
-//
-//        displayer.display(new Report1SumAllUsers(data));
-//        displayer.display(new Report2SumAllProjects(data));
-//        displayer.display(new Report4Top10Tasks(data));
-//        displayer.display(new Report3UsersAllProjects(data));
-//        displayer.display(new Report5UsersMaxTimeLoad(data));
 
-
-//        List<Report1SumAllUsersRow> report1List = List.of(
-//                new Report1SumAllUsersRow("Jan Kowalski", 50),
-//                new Report1SumAllUsersRow("Tomasz Nankaniec", 120)
-//        );
-//
-//        PrintReport<Report1SumAllUsersRow> report1 = new PrintReport1SumAllUsers();
-//
-//        report1.print(report1List);
-//
-//
-//        List<Report2SumAllProjectsRow> report2List = List.of(
-//                new Report2SumAllProjectsRow("Projekt pierwszy", 50),
-//                new Report2SumAllProjectsRow("Projekt drugi", 120)
-//        );
-//
-//        PrintReport<Report2SumAllProjectsRow> report2 = new PrintReport2SumAllProjects();
-//
-//        report2.print(report2List);
 
 
     }

@@ -22,6 +22,8 @@ public class InputLoader {
     Date to;
     String user;
     Path path;
+    Boolean print;
+    String project;
 
     public static InputLoader create(String[] args) throws ParseException {
         if (args == null || args.length == 0) {
@@ -38,6 +40,8 @@ public class InputLoader {
 //        Date t = null;
         String u = null;
         Path p = null;
+        Boolean x = false;
+        String j = null;
 
         List<String> arglist = new ArrayList<>(Arrays.asList(args));
         c = arglist.remove(0);
@@ -68,6 +72,16 @@ public class InputLoader {
                                 "Invalid 'from' date (-f): '" + value + "'. Expected format: yyyy-MM-dd.", e);
                     }
                     break;
+                case 'x':
+                    if (value.equals("x")) {
+                        x = true;
+                        break;
+                    }
+                case 'j':
+                    j = value;
+
+            break;
+
                 case 't':
                     try {
                         t = sdf.parse(value);
@@ -101,6 +115,7 @@ public class InputLoader {
                     "Start date '" + sdf.format(f) + "' cannot be after end date '" + sdf.format(t) + "'.");
         }
 
-        return InputLoader.builder().command(c).from(f).to(t).user(u+".xlsx").path(p).build();
+        return InputLoader.builder().command(c).from(f).to(t)
+                .user(u + ".xlsx").path(p).print(x).project(j).build();
     }
 }
