@@ -27,7 +27,7 @@ public class Main {
                 new Report1SumAllUsers(data, dateFrom, dateTo);
 
 //        new Displayer().display(report);
-        App app = new App();
+        App app= new App();
         app.run(args);
     }
 }
