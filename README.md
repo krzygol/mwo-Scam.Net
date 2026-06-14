@@ -19,22 +19,20 @@ Shelljava -jar app.jar COMMAND [options]
 | `COMMAND` | Operation name (required) | `Report1SumAllUsers` |
 | `-f_YYYY-MM-DD` | Start date | `-f_2024-01-01` |
 | `-t_YYYY-MM-DD` | End date | `-t_2024-12-31` |
-| `-u_USER` | User name | `-u_Karol` |
-| `-p_PATH` | Input data path | `-p_/data/input` |
+| `-u_USER` | User name | `-u_John` |
+| `-p_PATH` | Input data path | `-p_C:\Users\John\Dane` |
 | `-x_YES` | Print out .XLSX | `-x_YES` |
 | `-j_PROJECT1` | Filter for project | `-p_Projekt1` |
 
-Avaliable name of Reports:
+Avaliable Options of Reports:
+Report0Metadata, Report1SumAllUsers, Report2SumAllProjects, Report3UsersAllProjects, Report4Top10Tasks, Report5UsersMaxTimeLoad, Report6GivenUserMaxTimeTasks
+Avaliable Options for Flag -x: (YES)
 
-Report1SumAllUsers                                                                                               
-Report2SumAllProjects                                                                                                    
-Report3UsersAllProjects                                                                                                  
-Report4Top10Tasks                                                                                                        
-Report5UsersMaxTimeLoad
+
 
 🧪 Example Usage
 Shelljava:
--jar app.jar Report3UsersAllProjects -f_2024-01-01 -t_2024-06-01 -u_John -p_/data/inputShow
+-jar app.jar Report3UsersAllProjects -f_2024-01-01 -t_2024-06-01 -u_John -p_C:\Users\John\Dane
 
 📌 Default Values
 If options are not provided:
