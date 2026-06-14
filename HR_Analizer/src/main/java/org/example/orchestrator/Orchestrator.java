@@ -75,6 +75,14 @@ public class Orchestrator {
                         inputLoader
                 );
                 break;
+
+            case "Report6GivenUserMaxTimeTasks":
+                new ReportExecutor().execute(
+                        REPORT_6,
+                        dataModel,
+                        inputLoader
+                );
+                break;
         }
     }
 

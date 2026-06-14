@@ -6,6 +6,7 @@ import org.example.model.DataModel;
 import org.example.orchestrator.InputLoader;
 import org.example.orchestrator.ReportType;
 import org.example.report.*;
+import org.example.export.ExcelReport6GivenUserMaxTimeTasks;
 
 
 public class ReportExecutor {
@@ -85,6 +86,20 @@ public class ReportExecutor {
                         "report5.xlsx",
                         report,
                         new ExcelReport5UsersMaxTimeLoad()
+                );
+            }
+
+            case REPORT_6 -> {
+
+                Report6GivenUserMaxTimeTasksData report =
+                        new Report6GivenUserMaxTimeTasks(data, inputLoader).generate();
+
+                new DisplayReport6GivenUserMaxTimeTasks().display(report);
+
+                excelWriter.write(
+                        "report6.xlsx",
+                        report,
+                        new ExcelReport6GivenUserMaxTimeTasks()
                 );
             }
         }

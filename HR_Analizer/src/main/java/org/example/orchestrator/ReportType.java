@@ -5,5 +5,6 @@ public enum ReportType {
     REPORT_2,
     REPORT_3,
     REPORT_4,
-    REPORT_5
+    REPORT_5,
+    REPORT_6
 }
