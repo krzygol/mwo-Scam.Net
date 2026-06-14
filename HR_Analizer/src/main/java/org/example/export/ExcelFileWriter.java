@@ -19,7 +19,7 @@ public class ExcelFileWriter {
 
             workbook.write(fos);
 
-            System.out.println("Zapisano: " + fileName);
+            System.out.println("\nExport to file: " + fileName);
 
         } catch (IOException e) {
             System.err.println("Błąd podczas zapisu pliku: " + fileName);
