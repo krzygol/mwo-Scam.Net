@@ -32,7 +32,7 @@ Report5UsersMaxTimeLoad
 
 🧪 Example Usage
 Shelljava:
--jar app.jar REPORT -f_2024-01-01 -t_2024-06-01 -u_John -p_/data/inputShow
+-jar app.jar Report3UsersAllProjects -f_2024-01-01 -t_2024-06-01 -u_John -p_/data/inputShow
 
 📌 Default Values
 If options are not provided:
