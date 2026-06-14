@@ -11,13 +11,16 @@ import java.util.Scanner;
 public class Orchestrator {
 
     DataModel dataModel;
+    InputLoader inputLoader;
+
+String command = inputLoader.getCommand();
 
 
-    Scanner scanner = new Scanner(System.in);
-
-    public Orchestrator(DataModel dataModel) {
+    public Orchestrator(DataModel dataModel, InputLoader inputLoader) {
         this.dataModel = dataModel;
+        this.inputLoader = inputLoader;
     }
+
 
     public void controller(){
 
@@ -27,40 +30,39 @@ public class Orchestrator {
 
 
 
-        while (true) {
-            String line = scanner.nextLine();
 
-            switch (line) {
+
+            switch (command) {
                 case "Raport1SumAllUser":
-                    Report report = new Report1SumAllUsers(dataModel);
-                    displayer.display(report);
+                    Report report1 = new Report1SumAllUsers(dataModel,inputLoader);
+                    displayer.display(report1);
 
-            }
 
-            switch (line) {
+
+
                 case "Report2SumAllProjects":
-                    Report report = new Report2SumAllProjects(dataModel);
-                    displayer.display(report);
+                    Report report2 = new Report2SumAllProjects(dataModel, inputLoader);
+                    displayer.display(report2);
 
-            }
-            switch (line) {
-                case "Report2SumAllProjects":
-                    Report report = new Report3UsersAllProjects(dataModel);
-                    displayer.display(report);
 
-            }
-            switch (line) {
-                case "Report2SumAllProjects":
-                    Report report = new Report4Top10Tasks(dataModel);
-                    displayer.display(report);
 
-            }
-            switch (line) {
-                case "Report2SumAllProjects":
-                    Report report = new Report5UsersMaxTimeLoad(dataModel);
-                    displayer.display(report);
+                case "Report3UsersAllProjects":
+                    Report report3 = new Report3UsersAllProjects(dataModel,inputLoader);
+                    displayer.display(report3);
 
-            }
+
+
+                case "Report4Top10Tasks":
+                    Report report4 = new Report4Top10Tasks(dataModel,inputLoader);
+                    displayer.display(report4);
+
+
+
+                case "Report5UsersMaxTimeLoad":
+                    Report report5 = new Report5UsersMaxTimeLoad(dataModel, inputLoader);
+                    displayer.display(report5);
+
+
 
         }
     }
