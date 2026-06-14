@@ -1,13 +1,10 @@
 package org.example.orchestrator;
 
 
-import lombok.AllArgsConstructor;
 import org.example.display.*;
 import org.example.display.model.*;
 import org.example.model.DataModel;
 import org.example.report.*;
-
-import java.util.Scanner;
 
 public class Orchestrator {
 
@@ -21,7 +18,7 @@ public class Orchestrator {
     }
 
 
-    public void controller() {
+    public void selectReportAndExecute() {
 
         String command = inputLoader.getCommand();
         Report report;
@@ -30,7 +27,7 @@ public class Orchestrator {
 
 
         switch (command) {
-            case "Raport1SumAllUser":
+            case "Report1SumAllUsers":
                 Report1SumAllUsersData reportData1 = new Report1SumAllUsers(dataModel, inputLoader).generate();
                 Displayer<Report1SumAllUsersData> printer1 = new DisplayReport1SumAllUsers();
                 printer1.display(reportData1);

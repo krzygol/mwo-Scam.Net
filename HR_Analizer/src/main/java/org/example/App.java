@@ -5,10 +5,6 @@ import org.example.orchestrator.InputLoader;
 import org.example.orchestrator.Orchestrator;
 import org.example.reader.ReaderXLSX;
 
-import java.nio.file.Path;
-
-import java.util.List;
-
 public class App {
 
     public void run(String[] args) throws Exception {
@@ -23,7 +19,7 @@ public class App {
 
 
         Orchestrator orchestrator = new Orchestrator(data, inputLoader);
-        orchestrator.controller();
+        orchestrator.selectReportAndExecute();
 
 
 

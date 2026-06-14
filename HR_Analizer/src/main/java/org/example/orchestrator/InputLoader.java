@@ -2,6 +2,7 @@ package org.example.orchestrator;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.nio.file.Path;
 import java.text.ParseException;
@@ -11,7 +12,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-
+@Setter
 @Getter
 @Builder
 public class InputLoader {
