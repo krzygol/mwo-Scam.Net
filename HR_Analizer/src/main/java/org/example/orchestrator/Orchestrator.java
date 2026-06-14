@@ -2,6 +2,7 @@ package org.example.orchestrator;
 
 
 import lombok.AllArgsConstructor;
+import org.example.display.DisplayReport1SumAllUsers;
 import org.example.display.Displayer;
 import org.example.model.DataModel;
 import org.example.report.*;
@@ -26,7 +27,6 @@ String command = inputLoader.getCommand();
 
         System.out.println("TEST PROGRAMU!!");
 
-        Displayer displayer = new Displayer();
 
 
 
@@ -34,33 +34,28 @@ String command = inputLoader.getCommand();
 
             switch (command) {
                 case "Raport1SumAllUser":
-                    Report report1 = new Report1SumAllUsers(dataModel,inputLoader);
-                    displayer.display(report1);
+                    Report1SumAllUsers report1 = new Report1SumAllUsers(dataModel,inputLoader);
 
 
 
 
                 case "Report2SumAllProjects":
                     Report report2 = new Report2SumAllProjects(dataModel, inputLoader);
-                    displayer.display(report2);
 
 
 
                 case "Report3UsersAllProjects":
                     Report report3 = new Report3UsersAllProjects(dataModel,inputLoader);
-                    displayer.display(report3);
 
 
 
                 case "Report4Top10Tasks":
                     Report report4 = new Report4Top10Tasks(dataModel,inputLoader);
-                    displayer.display(report4);
 
 
 
                 case "Report5UsersMaxTimeLoad":
                     Report report5 = new Report5UsersMaxTimeLoad(dataModel, inputLoader);
-                    displayer.display(report5);
 
 
 
