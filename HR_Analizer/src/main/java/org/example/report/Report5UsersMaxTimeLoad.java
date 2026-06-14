@@ -1,14 +1,20 @@
 package org.example.report;
 
+import org.example.display.model.Report5UsersMaxTimeLoadData;
+import org.example.display.model.Report5UsersMaxTimeLoadRow;
 import org.example.model.DataModel;
 import org.example.model.Task;
 
 import java.util.*;
 
-public class Report5UsersMaxTimeLoad extends Report {
+public class Report5UsersMaxTimeLoad
+        extends Report<Report5UsersMaxTimeLoadData> {
+
+    private DataModel data;
 
     public Report5UsersMaxTimeLoad(DataModel data) {
         super(data);
+        this.data = data;
     }
 
     public Report5UsersMaxTimeLoad(DataModel data, Date dateFrom, Date dateTo) {
@@ -16,42 +22,55 @@ public class Report5UsersMaxTimeLoad extends Report {
     }
 
     @Override
-    public String getTitle() { // Changed title to reflect the top 5 users
-        return "Top 5 users with maximum time load";
-    }
+    public Report5UsersMaxTimeLoadData generate() {
 
-    @Override
-    public String generate() {
         Map<String, Map<String, Double>> byUserAndTask = new HashMap<>();
 
         for (Task task : tasks) {
             byUserAndTask
                     .computeIfAbsent(task.getUser(), k -> new HashMap<>())
-                    .merge(task.getName(), task.getDuration(), Double::sum);
-        }
-
-        if (byUserAndTask.isEmpty()) {
-            return "No data available.";
+                    .merge(task.getName(),
+                            task.getDuration(),
+                            Double::sum);
         }
 
         Map<String, Double> totalByUser = new HashMap<>();
-        for (Map.Entry<String, Map<String, Double>> userEntry : byUserAndTask.entrySet()) {
-            double total = userEntry.getValue().values().stream()
+
+        for (Map.Entry<String, Map<String, Double>> userEntry
+                : byUserAndTask.entrySet()) {
+
+            double total = userEntry.getValue()
+                    .values()
+                    .stream()
                     .mapToDouble(Double::doubleValue)
                     .sum();
+
             totalByUser.put(userEntry.getKey(), total);
         }
 
-        List<Map.Entry<String, Double>> sorted = totalByUser.entrySet().stream()
+        List<Report5UsersMaxTimeLoadRow> rows = new ArrayList<>();
+
+        int rank = 1;
+
+        for (Map.Entry<String, Double> entry : totalByUser.entrySet()
+                .stream()
                 .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
                 .limit(5)
-                .toList();
+                .toList()) {
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(getTitle());
-        for (Map.Entry<String, Double> entry : sorted) {
-            sb.append(String.format("%-30s %.2f h%n", entry.getKey(), entry.getValue()));
+            rows.add(
+                    new Report5UsersMaxTimeLoadRow(
+                            rank++,
+                            entry.getKey(),
+                            entry.getValue()
+                    )
+            );
         }
-        return sb.toString();
+
+        return new Report5UsersMaxTimeLoadData(
+                "2026-06-01",     // dateFrom
+                "2026-06-30",
+                rows
+        );
     }
 }

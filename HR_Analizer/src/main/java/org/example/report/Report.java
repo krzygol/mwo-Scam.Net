@@ -6,7 +6,8 @@ import org.example.model.Task;
 import java.util.Date;
 import java.util.List;
 
-public abstract class Report {
+public abstract class Report<T> {
+
     protected final List<Task> tasks;
     protected final Date dateFrom;
     protected final Date dateTo;
@@ -24,6 +25,5 @@ public abstract class Report {
                 .toList();
     }
 
-    public abstract String getTitle();
-    public abstract String generate();
+    public abstract T generate();
 }

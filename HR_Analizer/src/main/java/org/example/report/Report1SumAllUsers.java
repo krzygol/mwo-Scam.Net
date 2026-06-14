@@ -1,11 +1,14 @@
 package org.example.report;
 
+import org.example.display.model.Report1SumAllUsersData;
+import org.example.display.model.Report1SumAllUsersRow;
 import org.example.model.DataModel;
 import org.example.model.Task;
 
 import java.util.*;
 
-public class Report1SumAllUsers extends Report {
+public class Report1SumAllUsers
+        extends Report<Report1SumAllUsersData> {
 
     public Report1SumAllUsers(DataModel data) {
         super(data);
@@ -16,12 +19,7 @@ public class Report1SumAllUsers extends Report {
     }
 
     @Override
-    public String getTitle() {
-        return "Total hours by user";
-    }
-
-    @Override
-    public String generate() {
+    public Report1SumAllUsersData generate() {
 
         Map<String, Double> totalByUser = new HashMap<>();
 
@@ -33,25 +31,23 @@ public class Report1SumAllUsers extends Report {
             );
         }
 
-        if (totalByUser.isEmpty()) {
-            return "No data available.";
-        }
+        List<Report1SumAllUsersRow> rows = new ArrayList<>();
 
-        List<Map.Entry<String, Double>> sorted = totalByUser.entrySet().stream()
+        totalByUser.entrySet().stream()
                 .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
-                .toList();
+                .forEach(entry ->
+                        rows.add(
+                                new Report1SumAllUsersRow(
+                                        entry.getKey(),
+                                        entry.getValue().doubleValue()
+                                )
+                        )
+                );
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(getTitle()).append("\n");
-
-        for (Map.Entry<String, Double> entry : sorted) {
-            sb.append(String.format(
-                    "%-30s %.2f h%n",
-                    entry.getKey(),
-                    entry.getValue()
-            ));
-        }
-
-        return sb.toString();
+        return new Report1SumAllUsersData(
+                "2026-06-01",     // dateFrom
+                "2026-06-30",              // dateTo
+                rows
+        );
     }
 }

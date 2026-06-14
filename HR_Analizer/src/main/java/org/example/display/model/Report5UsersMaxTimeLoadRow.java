@@ -1,6 +1,9 @@
 package org.example.display.model;
 
-public record Report1SumAllUsersRow(
+import java.math.BigDecimal;
+
+public record Report5UsersMaxTimeLoadRow(
+        int rank,
         String userName,
         double workingHours
 ) {

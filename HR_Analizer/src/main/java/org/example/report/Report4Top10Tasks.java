@@ -1,11 +1,16 @@
 package org.example.report;
 
+import org.example.display.model.Report4Top10TasksData;
+import org.example.display.model.Report4Top10TasksRow;
 import org.example.model.DataModel;
 import org.example.model.Task;
 
 import java.util.*;
 
-public class Report4Top10Tasks extends Report {
+public class Report4Top10Tasks
+        extends Report<Report4Top10TasksData> {
+
+    private DataModel data;
 
     public Report4Top10Tasks(DataModel data) {
         super(data);
@@ -13,15 +18,11 @@ public class Report4Top10Tasks extends Report {
 
     public Report4Top10Tasks(DataModel data, Date dateFrom, Date dateTo) {
         super(data, dateFrom, dateTo);
+        this.data = data;
     }
 
     @Override
-    public String getTitle() {
-        return "Top 10 tasks by total time";
-    }
-
-    @Override
-    public String generate() {
+    public Report4Top10TasksData generate() {
 
         Map<String, Double> totalByTask = new HashMap<>();
 
@@ -33,29 +34,28 @@ public class Report4Top10Tasks extends Report {
             );
         }
 
-        if (totalByTask.isEmpty()) {
-            return "No data available.";
-        }
-
-        List<Map.Entry<String, Double>> sorted = totalByTask.entrySet().stream()
-                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
-                .limit(10)
-                .toList();
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(getTitle()).append("\n");
+        List<Report4Top10TasksRow> rows = new ArrayList<>();
 
         int rank = 1;
 
-        for (Map.Entry<String, Double> entry : sorted) {
-            sb.append(String.format(
-                    "%2d. %-40s %.2f h%n",
-                    rank++,
-                    entry.getKey(),
-                    entry.getValue()
-            ));
+        for (Map.Entry<String, Double> entry : totalByTask.entrySet().stream()
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .limit(10)
+                .toList()) {
+
+            rows.add(
+                    new Report4Top10TasksRow(
+                            rank++,
+                            entry.getKey(),
+                            entry.getValue()
+                    )
+            );
         }
 
-        return sb.toString();
+        return new Report4Top10TasksData(
+                "2026-06-01",     // dateFrom
+                "2026-06-30",
+                rows
+        );
     }
 }

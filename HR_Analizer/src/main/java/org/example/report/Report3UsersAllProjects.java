@@ -1,16 +1,21 @@
 package org.example.report;
 
+import org.example.display.model.Report3UsersAllProjectsData;
+import org.example.display.model.Report3UsersAllProjectsRow;
 import org.example.model.DataModel;
 import org.example.model.Task;
 
 import java.util.*;
 
-public class Report3UsersAllProjects extends Report {
+public class Report3UsersAllProjects
+        extends Report<Report3UsersAllProjectsData> {
 
+    private DataModel data;
     private final String userID;
 
     public Report3UsersAllProjects(DataModel data, String userID) {
         super(data);
+        this.data = data;
         this.userID = userID;
     }
 
@@ -20,30 +25,51 @@ public class Report3UsersAllProjects extends Report {
     }
 
     @Override
-    public String getTitle() {
-        return "Report 3: All projects for user: " + userID;
-    }
+    public Report3UsersAllProjectsData generate() {
 
-    @Override
-    public String generate() {
         Map<String, Double> taskMap = new HashMap<>();
 
         for (Task task : tasks) {
             if (task.getUser().equals(userID)) {
-                taskMap.merge(task.getName(), task.getDuration(), Double::sum);
+                taskMap.merge(
+                        task.getProject(),
+                        task.getDuration(),
+                        Double::sum
+                );
             }
         }
 
-        if (taskMap.isEmpty()) {
-            return "No data available for user: " + userID;
-        }
+        double totalHours = taskMap.values()
+                .stream()
+                .mapToDouble(Double::doubleValue)
+                .sum();
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(getTitle());
-        sb.append(userID).append(":\n");
-        for (Map.Entry<String, Double> entry : taskMap.entrySet()) {
-            sb.append(String.format("  %-28s %.2f h%n", entry.getKey(), entry.getValue()));
-        }
-        return sb.toString();
+        List<Report3UsersAllProjectsRow> rows = new ArrayList<>();
+
+        taskMap.entrySet().stream()
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .forEach(entry -> {
+
+                    double  hours = entry.getValue();
+
+                    double percentage = totalHours == 0
+                            ? 0
+                            : hours * 100.0 / totalHours;
+
+                    rows.add(
+                            new Report3UsersAllProjectsRow(
+                                    entry.getKey(),
+                                    hours,
+                                    percentage
+                            )
+                    );
+                });
+
+        return new Report3UsersAllProjectsData(
+                "2026-06-01",     // dateFrom
+                "2026-06-30",              // dateTo
+                userID,
+                rows
+        );
     }
 }

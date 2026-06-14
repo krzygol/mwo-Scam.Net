@@ -1,14 +1,20 @@
 package org.example.report;
 
+import org.example.display.model.Report2SumAllProjectsData;
+import org.example.display.model.Report2SumAllProjectsRow;
 import org.example.model.DataModel;
 import org.example.model.Task;
 
 import java.util.*;
 
-public class Report2SumAllProjects extends Report {
+public class Report2SumAllProjects
+        extends Report<Report2SumAllProjectsData> {
+
+    private DataModel data;
 
     public Report2SumAllProjects(DataModel data) {
         super(data);
+        this.data = data;
     }
 
     public Report2SumAllProjects(DataModel data, Date dateFrom, Date dateTo) {
@@ -16,12 +22,7 @@ public class Report2SumAllProjects extends Report {
     }
 
     @Override
-    public String getTitle() {
-        return "Total hours by project";
-    }
-
-    @Override
-    public String generate() {
+    public Report2SumAllProjectsData generate() {
 
         Map<String, Double> totalByProject = new HashMap<>();
 
@@ -33,25 +34,23 @@ public class Report2SumAllProjects extends Report {
             );
         }
 
-        if (totalByProject.isEmpty()) {
-            return "No data available.";
-        }
+        List<Report2SumAllProjectsRow> rows = new ArrayList<>();
 
-        List<Map.Entry<String, Double>> sorted = totalByProject.entrySet().stream()
+        totalByProject.entrySet().stream()
                 .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
-                .toList();
+                .forEach(entry ->
+                        rows.add(
+                                new Report2SumAllProjectsRow(
+                                        entry.getKey(),
+                                        entry.getValue().doubleValue()
+                                )
+                        )
+                );
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(getTitle()).append("\n");
-
-        for (Map.Entry<String, Double> entry : sorted) {
-            sb.append(String.format(
-                    "%-30s %.2f h%n",
-                    entry.getKey(),
-                    entry.getValue()
-            ));
-        }
-
-        return sb.toString();
+        return new Report2SumAllProjectsData(
+                "2026-06-01",     // dateFrom
+                "2026-06-30",              // dateTo
+                rows
+        );
     }
 }
