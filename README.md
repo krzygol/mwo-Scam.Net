@@ -17,10 +17,12 @@ Shelljava -jar app.jar COMMAND [options]
 | Argument | Description | Example |
 |----------|------------|---------|
 | `COMMAND` | Operation name (required) | `Report1SumAllUsers` |
-| `-fYYYY-MM-DD` | Start date (from) | `-f_2024-01-01` |
-| `-tYYYY-MM-DD` | End date (to) | `-t_2024-12-31` |
-| `-uUSER` | User name | `-u_Karol` |
-| `-pPATH` | Input data path | `-p_/data/input` |
+| `-f_YYYY-MM-DD` | Start date | `-f_2024-01-01` |
+| `-t_YYYY-MM-DD` | End date | `-t_2024-12-31` |
+| `-u_USER` | User name | `-u_Karol` |
+| `-p_PATH` | Input data path | `-p_/data/input` |
+| `-x_YES` | Print out .XLSX | `-x_YES` |
+| `-j_PROJECT1` | Filter for project | `-p_Projekt1` |
 
 Avaliable name of Reports:
 
