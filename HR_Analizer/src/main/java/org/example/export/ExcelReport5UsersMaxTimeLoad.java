@@ -1,51 +1,37 @@
 package org.example.export;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.example.display.model.Report1SumAllUsersData;
-import org.example.display.model.Report1SumAllUsersRow;
-
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.example.display.model.Report5UsersMaxTimeLoadData;
+import org.example.display.model.Report5UsersMaxTimeLoadRow;
 
-public class ExcelReport1SumAllUsers
-        implements ExcelExporter<Report1SumAllUsersData> {
+public class ExcelReport5UsersMaxTimeLoad
+        implements ExcelExporter<Report5UsersMaxTimeLoadData> {
 
     @Override
-    public void export(Report1SumAllUsersData report,
+    public void export(Report5UsersMaxTimeLoadData report,
                        Workbook workbook) {
 
-        Sheet sheet = workbook.createSheet("Report 1");
+        Sheet sheet = workbook.createSheet("Report 5");
 
         int rowNum = 0;
 
         /*
-         * Styl tytułu
+         * Style
          */
-        Font titleFont = workbook.createFont();
-        titleFont.setBold(true);
-
         CellStyle titleStyle = workbook.createCellStyle();
-        titleStyle.setFont(titleFont);
         titleStyle.setAlignment(HorizontalAlignment.CENTER);
 
-        /*
-         * Styl nagłówków
-         */
-        Font headerFont = workbook.createFont();
-        headerFont.setBold(true);
+        Font titleFont = workbook.createFont();
+        titleFont.setBold(true);
+        titleStyle.setFont(titleFont);
 
         CellStyle headerStyle = workbook.createCellStyle();
+        headerStyle.setAlignment(HorizontalAlignment.CENTER);
+
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
         headerStyle.setFont(headerFont);
-
-        /*
-         * Styl liczbowy dla godzin
-         */
-        DataFormat dataFormat = workbook.createDataFormat();
-
-        CellStyle hoursStyle = workbook.createCellStyle();
-        hoursStyle.setDataFormat(dataFormat.getFormat("0.00"));
 
         /*
          * Tytuł raportu
@@ -53,15 +39,15 @@ public class ExcelReport1SumAllUsers
         Row row = sheet.createRow(rowNum++);
 
         Cell cell = row.createCell(0);
-        cell.setCellValue("REPORT 1: WORK SUMMARY ALL EMPLOYEES");
+        cell.setCellValue("REPORT 5: TOP 5 EMPLOYEES IN PROJECTS");
         cell.setCellStyle(titleStyle);
 
-        // Scal komórki A1:B1
+        // Scal A1:C1
         sheet.addMergedRegion(new CellRangeAddress(
                 row.getRowNum(),
                 row.getRowNum(),
                 0,
-                1
+                2
         ));
 
         /*
@@ -89,27 +75,33 @@ public class ExcelReport1SumAllUsers
          */
         row = sheet.createRow(rowNum++);
 
-        cell = row.createCell(0);
-        cell.setCellValue("Full Name");
-        cell.setCellStyle(headerStyle);
+        Cell headerCell = row.createCell(0);
+        headerCell.setCellValue("No.");
+        headerCell.setCellStyle(headerStyle);
 
-        cell = row.createCell(1);
-        cell.setCellValue("Hours");
-        cell.setCellStyle(headerStyle);
+        headerCell = row.createCell(1);
+        headerCell.setCellValue("Employee");
+        headerCell.setCellStyle(headerStyle);
+
+        headerCell = row.createCell(2);
+        headerCell.setCellValue("Hours");
+        headerCell.setCellStyle(headerStyle);
 
         /*
          * Dane
          */
-        for (Report1SumAllUsersRow dataRow : report.rows()) {
+        for (Report5UsersMaxTimeLoadRow dataRow : report.rows()) {
 
             row = sheet.createRow(rowNum++);
 
             row.createCell(0)
+                    .setCellValue(dataRow.rank());
+
+            row.createCell(1)
                     .setCellValue(dataRow.userName());
 
-            Cell hoursCell = row.createCell(1);
-            hoursCell.setCellValue(dataRow.workingHours());
-            hoursCell.setCellStyle(hoursStyle);
+            row.createCell(2)
+                    .setCellValue(dataRow.workingHours());
         }
 
         /*
@@ -129,5 +121,8 @@ public class ExcelReport1SumAllUsers
         sheet.autoSizeColumn(0);
         sheet.autoSizeColumn(1);
         sheet.autoSizeColumn(2);
+
+        // Opcjonalnie można ustawić stałą szerokość dla nazw pracowników:
+        // sheet.setColumnWidth(1, 30 * 256);
     }
 }

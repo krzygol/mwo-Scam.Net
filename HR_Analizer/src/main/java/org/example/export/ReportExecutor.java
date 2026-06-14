@@ -1,20 +1,11 @@
 package org.example.export;
 
-import org.example.display.DisplayReport1SumAllUsers;
-import org.example.display.DisplayReport2SumAllProjects;
-import org.example.display.DisplayReport3UsersAllProjects;
-import org.example.display.DisplayReport4Top10Tasks;
-import org.example.display.model.Report1SumAllUsersData;
-import org.example.display.model.Report2SumAllProjectsData;
-import org.example.display.model.Report3UsersAllProjectsData;
-import org.example.display.model.Report4Top10TasksData;
+import org.example.display.*;
+import org.example.display.model.*;
 import org.example.model.DataModel;
 import org.example.orchestrator.InputLoader;
 import org.example.orchestrator.ReportType;
-import org.example.report.Report1SumAllUsers;
-import org.example.report.Report2SumAllProjects;
-import org.example.report.Report3UsersAllProjects;
-import org.example.report.Report4Top10Tasks;
+import org.example.report.*;
 
 
 public class ReportExecutor {
@@ -82,20 +73,20 @@ public class ReportExecutor {
                         new ExcelReport4Top10Tasks()
                 );
             }
-//
-//            case REPORT_5 -> {
-//
-//                Report5UsersMaxTimeLoadData report =
-//                        new Report5UsersMaxTimeLoad(data).generate();
-//
-//                new PrintReport5UsersMaxTimeLoad().print(report);
-//
-//                excelWriter.write(
-//                        "report5.xlsx",
-//                        report,
-//                        new ExcelReport5UsersMaxTimeLoad()
-//                );
-//            }
+
+            case REPORT_5 -> {
+
+                Report5UsersMaxTimeLoadData report =
+                        new Report5UsersMaxTimeLoad(data, inputLoader).generate();
+
+                new DisplayReport5UsersMaxTimeLoad().display(report);
+
+                excelWriter.write(
+                        "report5.xlsx",
+                        report,
+                        new ExcelReport5UsersMaxTimeLoad()
+                );
+            }
         }
     }
 }

@@ -66,16 +66,18 @@ public class Orchestrator {
                         dataModel,
                         inputLoader
                 );
-
-//                Report4Top10TasksData reportData4 = new Report4Top10Tasks(dataModel, inputLoader).generate();
-//                Displayer<Report4Top10TasksData> printer4 = new DisplayReport4Top10Tasks();
-//                printer4.display(reportData4);
                 break;
 
             case "Report5UsersMaxTimeLoad":
-                Report5UsersMaxTimeLoadData reportData5 = new Report5UsersMaxTimeLoad(dataModel, inputLoader).generate();
-                Displayer<Report5UsersMaxTimeLoadData> printer5 = new DisplayReport5UsersMaxTimeLoad();
-                printer5.display(reportData5);
+                new ReportExecutor().execute(
+                        REPORT_5,
+                        dataModel,
+                        inputLoader
+                );
+
+//                Report5UsersMaxTimeLoadData reportData5 = new Report5UsersMaxTimeLoad(dataModel, inputLoader).generate();
+//                Displayer<Report5UsersMaxTimeLoadData> printer5 = new DisplayReport5UsersMaxTimeLoad();
+//                printer5.display(reportData5);
                 break;
         }
     }
