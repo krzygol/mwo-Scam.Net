@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.nio.file.Path;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -14,6 +16,7 @@ import java.util.List;
 @Builder
 public class InputLoader {
 
+
     String command;
     Date from;
     Date to;
@@ -21,11 +24,13 @@ public class InputLoader {
     Path path;
 
 
-    public static InputLoader create(String[] args) {
+    public static InputLoader create(String[] args) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
 
         String c = null;
-        Date f = null;
-        Date t = null;
+        Date f = sdf.parse("2000-01-01");
+        Date t = sdf.parse("2050-01-01");
         String u = null;
         Path p = null;
 
