@@ -34,10 +34,10 @@ public class InputLoader {
         sdf.setLenient(false);
 
         String c = null;
-        Date f = sdf.parse("2000-05-01");
-        Date t = sdf.parse("2050-01-01");
-//        Date f = null;
-//        Date t = null;
+//        Date f = sdf.parse("2000-05-01");
+//        Date t = sdf.parse("2050-01-01");
+        Date f = null;
+        Date t = null;
         String u = null;
         Path p = null;
         Boolean x = false;
@@ -110,10 +110,10 @@ public class InputLoader {
             }
         }
 
-        if (f.after(t)) {
-            throw new IllegalArgumentException(
-                    "Start date '" + sdf.format(f) + "' cannot be after end date '" + sdf.format(t) + "'.");
-        }
+//        if (f.after(t)) {
+//            throw new IllegalArgumentException(
+//                    "Start date '" + sdf.format(f) + "' cannot be after end date '" + sdf.format(t) + "'.");
+//        }
 
         return InputLoader.builder().command(c).from(f).to(t)
                 .user(u + ".xlsx").path(p).print(x).project(j).build();
