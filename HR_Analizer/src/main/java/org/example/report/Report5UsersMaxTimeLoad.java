@@ -72,9 +72,9 @@ public class Report5UsersMaxTimeLoad
         }
 
         return new Report5UsersMaxTimeLoadData(
-                new SimpleDateFormat("yyyy-mm-dd")
+                new SimpleDateFormat("yyyy-MM-dd")
                         .format(inputLoader.getFrom()),
-                new SimpleDateFormat("yyyy-mm-dd")
+                new SimpleDateFormat("yyyy-MM-dd")
                         .format(inputLoader.getTo()),
                 rows
         );

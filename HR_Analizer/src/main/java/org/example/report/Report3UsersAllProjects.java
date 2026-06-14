@@ -64,9 +64,9 @@ public class Report3UsersAllProjects
                 });
 
         return new Report3UsersAllProjectsData(
-                new SimpleDateFormat("yyyy-mm-dd")
+                new SimpleDateFormat("yyyy-MM-dd")
                         .format(inputLoader.getFrom()),
-                new SimpleDateFormat("yyyy-mm-dd")
+                new SimpleDateFormat("yyyy-MM-dd")
                         .format(inputLoader.getTo()),
                 userID,
                 rows

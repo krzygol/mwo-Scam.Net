@@ -46,9 +46,9 @@ public class Report1SumAllUsers
                 );
 
         return new Report1SumAllUsersData(
-                new SimpleDateFormat("yyyy-mm-dd")
+                new SimpleDateFormat("yyyy-MM-dd")
                         .format(inputLoader.getFrom()),
-                new SimpleDateFormat("yyyy-mm-dd")
+                new SimpleDateFormat("yyyy-MM-dd")
                         .format(inputLoader.getTo()),
                 rows
         );

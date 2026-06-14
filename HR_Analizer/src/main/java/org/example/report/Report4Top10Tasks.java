@@ -57,9 +57,9 @@ public class Report4Top10Tasks
         }
 
         return new Report4Top10TasksData(
-                new SimpleDateFormat("yyyy-mm-dd")
+                new SimpleDateFormat("yyyy-MM-dd")
                         .format(inputLoader.getFrom()),
-                new SimpleDateFormat("yyyy-mm-dd")
+                new SimpleDateFormat("yyyy-MM-dd")
                         .format(inputLoader.getTo()),
                 rows
         );

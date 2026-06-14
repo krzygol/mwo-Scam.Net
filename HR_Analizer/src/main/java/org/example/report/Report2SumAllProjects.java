@@ -47,9 +47,9 @@ public class Report2SumAllProjects
                 );
 
         return new Report2SumAllProjectsData(
-                new SimpleDateFormat("yyyy-mm-dd")
+                new SimpleDateFormat("yyyy-MM-dd")
                         .format(inputLoader.getFrom()),
-                new SimpleDateFormat("yyyy-mm-dd")
+                new SimpleDateFormat("yyyy-MM-dd")
                         .format(inputLoader.getTo()),
                 rows
         );
