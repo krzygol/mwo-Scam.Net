@@ -1,6 +1,7 @@
 package org.example.export;
 
 import org.example.display.DisplayReport1SumAllUsers;
+import org.example.display.DisplayReport2SumAllProjects;
 import org.example.display.model.Report1SumAllUsersData;
 import org.example.display.model.Report2SumAllProjectsData;
 import org.example.model.DataModel;
@@ -35,19 +36,19 @@ public class ReportExecutor {
                 );
             }
 
-//            case REPORT_2 -> {
-//
-//                Report2SumAllProjectsData report =
-//                        new Report2SumAllProjects(data).generate();
-//
-//                new PrintReport2SumAllProjects().print(report);
-//
-//                excelWriter.write(
-//                        "report2.xlsx",
-//                        report,
-//                        new ExcelReport2SumAllProjects()
-//                );
-//            }
+            case REPORT_2 -> {
+
+                Report2SumAllProjectsData report =
+                        new Report2SumAllProjects(data, inputLoader).generate();
+
+                new DisplayReport2SumAllProjects().display(report);
+
+                excelWriter.write(
+                        "report2.xlsx",
+                        report,
+                        new ExcelReport2SumAllProjects()
+                );
+            }
 //
 //            case REPORT_3 -> {
 //

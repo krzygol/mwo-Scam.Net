@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import static org.example.orchestrator.ReportType.REPORT_1;
+import static org.example.orchestrator.ReportType.REPORT_2;
 
 public class Orchestrator {
 
@@ -47,9 +48,15 @@ public class Orchestrator {
                 break;
 
             case "Report2SumAllProjects":
-                Report2SumAllProjectsData reportData = new Report2SumAllProjects(dataModel, inputLoader).generate();
-                Displayer<Report2SumAllProjectsData> printer2 = new DisplayReport2SumAllProjects();
-                printer2.display(reportData);
+                new ReportExecutor().execute(
+                        REPORT_2,
+                        dataModel,
+                        inputLoader
+                );
+
+//                Report2SumAllProjectsData reportData = new Report2SumAllProjects(dataModel, inputLoader).generate();
+//                Displayer<Report2SumAllProjectsData> printer2 = new DisplayReport2SumAllProjects();
+//                printer2.display(reportData);
                 break;
 
             case "Report3UsersAllProjects":
