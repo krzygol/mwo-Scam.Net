@@ -1,18 +1,10 @@
 package org.example.orchestrator;
 
 
-import lombok.AllArgsConstructor;
 import org.example.display.*;
-import org.example.report.Report0Metadata;
-import org.example.display.model.Report0MetadataData;
-import org.example.display.model.Report1SumAllUsersData;
-import org.example.display.model.Report2SumAllProjectsData;
-import org.example.display.model.Report3UsersAllProjectsData;
-import org.example.display.model.Report4Top10TasksData;
+import org.example.display.model.*;
 import org.example.model.DataModel;
 import org.example.report.*;
-
-import java.util.Scanner;
 
 public class Orchestrator {
 
@@ -26,7 +18,7 @@ public class Orchestrator {
     }
 
 
-    public void controller() {
+    public void selectReportAndExecute() {
 
         String command = inputLoader.getCommand();
         Report report;
@@ -35,13 +27,7 @@ public class Orchestrator {
 
 
         switch (command) {
-            case "Report0Metadata":
-                Report0MetadataData reportData0 = new Report0Metadata(dataModel, inputLoader).generate();
-                Displayer<Report0MetadataData> printer0 = new DisplayReport0Metadata();
-                printer0.display(reportData0);
-                break;
-
-            case "Raport1SumAllUser":
+            case "Report1SumAllUsers":
                 Report1SumAllUsersData reportData1 = new Report1SumAllUsers(dataModel, inputLoader).generate();
                 Displayer<Report1SumAllUsersData> printer1 = new DisplayReport1SumAllUsers();
                 printer1.display(reportData1);
@@ -66,10 +52,10 @@ public class Orchestrator {
                 break;
 
             case "Report5UsersMaxTimeLoad":
-                report = new Report5UsersMaxTimeLoad(dataModel, inputLoader);
+                Report5UsersMaxTimeLoadData reportData5 = new Report5UsersMaxTimeLoad(dataModel, inputLoader).generate();
+                Displayer<Report5UsersMaxTimeLoadData> printer5 = new DisplayReport5UsersMaxTimeLoad();
+                printer5.display(reportData5);
                 break;
-
-
         }
     }
 

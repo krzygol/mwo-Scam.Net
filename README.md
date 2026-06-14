@@ -1,37 +1,57 @@
-# mwo-Scam.Net
+CLI Usage Guide
 
-**********************  Readme  *****************************************
- 
-## Command Line Interface
- 
-The application is controlled via command-line arguments.
+✅ Overview
+This application parses command-line arguments (CLI) into structured input parameters used by the system.
+It supports:
+command execution
+date range filtering
+user filtering
+file path input
 
 
-**************************Details - UserCase********************************
+▶️ How to Run
+Shelljava -jar app.jar COMMAND [options]
 
-Report 1 – SumAllUsers
-User Story:
-As a manager,
-I want to see total worked hours per user,
-so that I can evaluate employee workload.
- 
-Report 2 – SumAllProjects
-As a project manager,
-I want to see total time spent per project,
-so that I can track project effort.
- 
-Report 3 – UsersAllProjects
-As a manager,
-I want to see which users worked on which projects,
-so that I understand resource allocation.
- 
-Report 4 – Top 10 Tasks
-As a manager,
-I want to see top 10 most time-consuming tasks,
-so that I can identify bottlenecks.
- 
-Report 5 – UsersMaxTimeLoad
-As a manager,
-I want to identify users with the highest workload,
-so that I can balance work distribution.
- 
+⚙️ Available Arguments
+
+| Argument | Description | Example |
+|----------|------------|---------|
+| `COMMAND` | Operation name (required) | `Report1SumAllUsers` |
+| `-fYYYY-MM-DD` | Start date (from) | `-f_2024-01-01` |
+| `-tYYYY-MM-DD` | End date (to) | `-t_2024-12-31` |
+| `-uUSER` | User name | `-u_Karol` |
+| `-pPATH` | Input data path | `-p_/data/input` |
+
+Avaliable name of Reports:
+
+Report1SumAllUsers                                                                                               
+Report2SumAllProjects                                                                                                    
+Report3UsersAllProjects                                                                                                  
+Report4Top10Tasks                                                                                                        
+Report5UsersMaxTimeLoad
+
+🧪 Example Usage
+Shelljava:
+-jar app.jar REPORT -f_2024-01-01 -t_2024-06-01 -u_John -p_/data/inputShow
+
+📌 Default Values
+If options are not provided:
+
+| Parameter | Default Value |
+|----------|--------------|
+| `from` | 2000-01-01 |
+| `to` | 2050-01-01 |
+| `user` | null |
+| `path` | null |
+
+⚠️ Important Notes
+
+Arguments must be passed with underscore:
+✅ -f_2024-01-01
+❌ -f 2024-01-01 (not supported)
+The first argument is always treated as the command
+
+Date format must follow:
+
+yyyy-MM-dd
+
