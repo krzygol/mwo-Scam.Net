@@ -14,8 +14,6 @@ public class Orchestrator {
     DataModel dataModel;
     InputLoader inputLoader;
 
-String command = inputLoader.getCommand();
-
 
     public Orchestrator(DataModel dataModel, InputLoader inputLoader) {
         this.dataModel = dataModel;
@@ -23,40 +21,38 @@ String command = inputLoader.getCommand();
     }
 
 
-    public void controller(){
+    public void controller() {
+
+        String command = inputLoader.getCommand();
+        Report report;
 
         System.out.println("TEST PROGRAMU!!");
 
 
+        switch (command) {
+            case "Raport1SumAllUser":
+                report = new Report1SumAllUsers(dataModel, inputLoader);
+                break;
 
 
+            case "Report2SumAllProjects":
+                report = new Report2SumAllProjects(dataModel, inputLoader);
+                break;
 
 
-            switch (command) {
-                case "Raport1SumAllUser":
-                    Report1SumAllUsers report1 = new Report1SumAllUsers(dataModel,inputLoader);
+            case "Report3UsersAllProjects":
+                report = new Report3UsersAllProjects(dataModel, inputLoader);
+                break;
 
 
+            case "Report4Top10Tasks":
+                report = new Report4Top10Tasks(dataModel, inputLoader);
+                break;
 
 
-                case "Report2SumAllProjects":
-                    Report report2 = new Report2SumAllProjects(dataModel, inputLoader);
-
-
-
-                case "Report3UsersAllProjects":
-                    Report report3 = new Report3UsersAllProjects(dataModel,inputLoader);
-
-
-
-                case "Report4Top10Tasks":
-                    Report report4 = new Report4Top10Tasks(dataModel,inputLoader);
-
-
-
-                case "Report5UsersMaxTimeLoad":
-                    Report report5 = new Report5UsersMaxTimeLoad(dataModel, inputLoader);
-
+            case "Report5UsersMaxTimeLoad":
+                report = new Report5UsersMaxTimeLoad(dataModel, inputLoader);
+                break;
 
 
         }
