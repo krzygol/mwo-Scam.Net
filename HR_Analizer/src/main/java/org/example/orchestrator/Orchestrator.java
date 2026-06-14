@@ -3,10 +3,7 @@ package org.example.orchestrator;
 
 import lombok.AllArgsConstructor;
 import org.example.display.*;
-import org.example.display.model.Report1SumAllUsersData;
-import org.example.display.model.Report2SumAllProjectsData;
-import org.example.display.model.Report3UsersAllProjectsData;
-import org.example.display.model.Report4Top10TasksData;
+import org.example.display.model.*;
 import org.example.model.DataModel;
 import org.example.report.*;
 
@@ -58,10 +55,10 @@ public class Orchestrator {
                 break;
 
             case "Report5UsersMaxTimeLoad":
-                report = new Report5UsersMaxTimeLoad(dataModel, inputLoader);
+                Report5UsersMaxTimeLoadData reportData5 = new Report5UsersMaxTimeLoad(dataModel, inputLoader).generate();
+                Displayer<Report5UsersMaxTimeLoadData> printer5 = new DisplayReport5UsersMaxTimeLoad();
+                printer5.display(reportData5);
                 break;
-
-
         }
     }
 
