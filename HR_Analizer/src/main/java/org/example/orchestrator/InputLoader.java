@@ -17,13 +17,11 @@ import java.util.List;
 @Builder
 public class InputLoader {
 
-
     String command;
     Date from;
     Date to;
     String user;
     Path path;
-
 
     public static InputLoader create(String[] args) throws ParseException {
         if (args == null || args.length == 0) {
@@ -39,8 +37,7 @@ public class InputLoader {
         String u = null;
         Path p = null;
 
-        List<String> arglist = new ArrayList<String>();
-        arglist.addAll(Arrays.asList(args));
+        List<String> arglist = new ArrayList<>(Arrays.asList(args));
         c = arglist.remove(0);
 
         if (c == null || c.isBlank()) {
@@ -50,7 +47,7 @@ public class InputLoader {
         for (String a : arglist) {
             if (a == null || a.length() < 3) {
                 throw new IllegalArgumentException(
-                    "Invalid argument: '" + a + "'. Expected format: -Xvalue (e.g. -f2024-01-01).");
+                        "Invalid argument: '" + a + "'. Expected format: -Xvalue (e.g. -f2024-01-01).");
             }
             if (a.charAt(0) != '-') {
                 throw new IllegalArgumentException(
@@ -58,7 +55,7 @@ public class InputLoader {
             }
 
             char flag = a.charAt(1);
-            String value = a.substring(3);
+            String value = a.substring(2);
 
             switch (flag) {
                 case 'f':
@@ -66,7 +63,7 @@ public class InputLoader {
                         f = sdf.parse(value);
                     } catch (ParseException e) {
                         throw new IllegalArgumentException(
-                            "Invalid 'from' date (-f): '" + value + "'. Expected format: yyyy-MM-dd.", e);
+                                "Invalid 'from' date (-f): '" + value + "'. Expected format: yyyy-MM-dd.", e);
                     }
                     break;
                 case 't':
@@ -74,10 +71,13 @@ public class InputLoader {
                         t = sdf.parse(value);
                     } catch (ParseException e) {
                         throw new IllegalArgumentException(
-                            "Invalid 'to' date (-t): '" + value + "'. Expected format: yyyy-MM-dd.", e);
+                                "Invalid 'to' date (-t): '" + value + "'. Expected format: yyyy-MM-dd.", e);
                     }
                     break;
                 case 'u':
+                    if (value.isBlank()) {
+                        throw new IllegalArgumentException("User (-u) cannot be empty.");
+                    }
                     u = value;
                     break;
                 case 'p':
@@ -85,19 +85,20 @@ public class InputLoader {
                         p = Path.of(value);
                     } catch (java.nio.file.InvalidPathException e) {
                         throw new IllegalArgumentException(
-                            "Invalid path (-p): '" + value + "'.", e);
+                                "Invalid path (-p): '" + value + "'.", e);
                     }
                     break;
                 default:
                     throw new IllegalArgumentException(
-                        "Unknown flag: '-" + flag + "'. Available flags: -f, -t, -u, -p.");
+                            "Unknown flag: '-" + flag + "'. Available flags: -f, -t, -u, -p.");
             }
         }
 
+        if (f.after(t)) {
+            throw new IllegalArgumentException(
+                    "Start date '" + sdf.format(f) + "' cannot be after end date '" + sdf.format(t) + "'.");
+        }
+
         return InputLoader.builder().command(c).from(f).to(t).user(u).path(p).build();
-
     }
-
-
 }
-
