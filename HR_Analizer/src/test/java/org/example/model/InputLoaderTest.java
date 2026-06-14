@@ -25,7 +25,7 @@ class InputLoaderTest {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         assertEquals("report1", input.getCommand());
-//        assertEquals("Jan", input.getUser());
+        assertEquals("Jan", input.getUser());
         assertEquals(Path.of("reporter-dane"), input.getPath());
 
         assertEquals(

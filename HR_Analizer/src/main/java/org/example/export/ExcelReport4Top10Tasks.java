@@ -39,7 +39,7 @@ public class ExcelReport4Top10Tasks
         Row row = sheet.createRow(rowNum++);
 
         Cell cell = row.createCell(0);
-        cell.setCellValue("REPORT 4: TOP 10 TASKS IN PROJECTS");
+        cell.setCellValue("REPORT 4: TOP 10 TASKS BY USER");
         cell.setCellStyle(titleStyle);
 
         // Scal A1:C1

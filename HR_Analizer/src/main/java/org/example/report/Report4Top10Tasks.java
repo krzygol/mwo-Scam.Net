@@ -12,17 +12,13 @@ import java.util.*;
 public class Report4Top10Tasks
         extends Report<Report4Top10TasksData> {
 
-    private DataModel data;
-    InputLoader inputLoader;
-
-//    public Report4Top10Tasks(DataModel data) {
-//        super(data);
-//    }
+    private final String userID;
+    private final InputLoader inputLoader;
 
     public Report4Top10Tasks(DataModel data, InputLoader inputLoader) {
         super(data, inputLoader);
-        this.data = data;
         this.inputLoader = inputLoader;
+        this.userID = inputLoader.getUser();
     }
 
     @Override
@@ -31,18 +27,23 @@ public class Report4Top10Tasks
         Map<String, Double> totalByTask = new HashMap<>();
 
         for (Task task : tasks) {
-            totalByTask.merge(
-                    task.getName(),
-                    task.getDuration(),
-                    Double::sum
-            );
+
+            if (task.getUser().equals(userID)) {
+
+                totalByTask.merge(
+                        task.getName(),
+                        task.getDuration(),
+                        Double::sum
+                );
+            }
         }
 
         List<Report4Top10TasksRow> rows = new ArrayList<>();
 
         int rank = 1;
 
-        for (Map.Entry<String, Double> entry : totalByTask.entrySet().stream()
+        for (Map.Entry<String, Double> entry : totalByTask.entrySet()
+                .stream()
                 .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
                 .limit(10)
                 .toList()) {
