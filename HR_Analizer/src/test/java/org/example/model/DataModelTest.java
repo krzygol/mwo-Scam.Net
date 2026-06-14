@@ -10,15 +10,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class DataModelTest {
 
     @Test
-    void addTask() throws Exception {
-        Path path = Path.of("reporter-dane");
+    void shouldAddTask() {
 
-        ReaderXLSX reader = new ReaderXLSX();
-        DataModel data = reader.importAll(path);
+        DataModel model = new DataModel();
 
-        for (Task task : data.getTasks()) {
-            System.out.println(task);
-        }
+        Task task = new Task(
+                "Test",
+                "CRM",
+                2.0,
+                "Jan",
+                new java.util.Date()
+        );
+
+        model.addTask(task);
+
+        assertEquals(1, model.getTasks().size());
+        assertEquals(task, model.getTasks().get(0));
     }
 
 }
