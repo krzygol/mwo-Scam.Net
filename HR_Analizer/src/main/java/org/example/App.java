@@ -17,11 +17,16 @@ public class App {
         DataModel data = reader.importAll(inputLoader.getPath());
 
 
-
         Orchestrator orchestrator = new Orchestrator(data, inputLoader);
 
-        orchestrator.controller();
+//        if (inputLoader.getFrom() == null) {
+//            inputLoader.setFrom(data.getMinDate());
+//        }
+//        if (inputLoader.getTo() == null) {
+//            inputLoader.setTo(data.getMaxDate());
+//        }
 
+        orchestrator.controller();
 
 
 //        Displayer displayer = new Displayer();

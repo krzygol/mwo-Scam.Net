@@ -79,7 +79,7 @@ public class ExcelReport3UsersAllProjects
         row = sheet.createRow(rowNum++);
 
         row.createCell(0).setCellValue("User");
-        row.createCell(1).setCellValue(report.userID());
+        row.createCell(1).setCellValue(report.userID().replaceFirst("\\.xlsx$", ""));
 
         /*
          * Pusty wiersz

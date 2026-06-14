@@ -101,6 +101,6 @@ public class InputLoader {
                     "Start date '" + sdf.format(f) + "' cannot be after end date '" + sdf.format(t) + "'.");
         }
 
-        return InputLoader.builder().command(c).from(f).to(t).user(u).path(p).build();
+        return InputLoader.builder().command(c).from(f).to(t).user(u+".xlsx").path(p).build();
     }
 }
