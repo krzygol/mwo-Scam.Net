@@ -34,35 +34,35 @@ String command = inputLoader.getCommand();
 
             switch (command) {
                 case "Raport1SumAllUser":
-                    Report report = new Report1SumAllUsers(dataModel,inputLoader);
-                    displayer.display(report);
+                    Report report1 = new Report1SumAllUsers(dataModel,inputLoader);
+                    displayer.display(report1);
 
-            }
 
-            switch (command) {
+
+
                 case "Report2SumAllProjects":
-                    Report report = new Report2SumAllProjects(dataModel, inputLoader);
-                    displayer.display(report);
+                    Report report2 = new Report2SumAllProjects(dataModel, inputLoader);
+                    displayer.display(report2);
 
-            }
-            switch (command) {
+
+
                 case "Report3UsersAllProjects":
-                    Report report = new Report3UsersAllProjects(dataModel,inputLoader);
-                    displayer.display(report);
+                    Report report3 = new Report3UsersAllProjects(dataModel,inputLoader);
+                    displayer.display(report3);
 
-            }
-            switch (command) {
+
+
                 case "Report4Top10Tasks":
-                    Report report = new Report4Top10Tasks(dataModel,inputLoader);
-                    displayer.display(report);
+                    Report report4 = new Report4Top10Tasks(dataModel,inputLoader);
+                    displayer.display(report4);
 
-            }
-            switch (command) {
+
+
                 case "Report5UsersMaxTimeLoad":
-                    Report report = new Report5UsersMaxTimeLoad(dataModel, inputLoader);
-                    displayer.display(report);
+                    Report report5 = new Report5UsersMaxTimeLoad(dataModel, inputLoader);
+                    displayer.display(report5);
 
-            }
+
 
         }
     }
