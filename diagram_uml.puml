@@ -1,0 +1,341 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+skinparam packageFontSize 13
+skinparam groupInheritance 2
+hide empty members
+
+' ===== ENTRY POINT =====
+package "org.example" {
+    class Main {
+        + {static} main(args: String[]) : void
+    }
+
+    class App {
+        + run(args: String[]) : void
+    }
+
+    Main --> App : creates & calls run()
+}
+
+' ===== MODEL =====
+package "org.example.model" {
+    class Task {
+        - name: String
+        - project: String
+        - duration: double
+        - user: String
+        - date: Date
+        + getName() : String
+        + getProject() : String
+        + getDuration() : double
+        + getUser() : String
+        + getDate() : Date
+        + toString() : String
+    }
+
+    class DataModel {
+        - tasks: List<Task>
+        + addTask(task: Task) : void
+        + getTasks() : List<Task>
+        + getMaxDate() : Date
+        + getMinDate() : Date
+        + getUserCount() : long
+        + getProjectCount() : long
+        + getTaskCount() : long
+        + getTotalDuration() : double
+        + getAvgDurationPerUser() : double
+        + getAvgDurationPerProject() : double
+        + getUsers() : List<String>
+        + getProjects() : List<String>
+    }
+
+    DataModel "1" o-- "0..*" Task : contains
+}
+
+' ===== READER =====
+package "org.example.reader" {
+    class ReaderXLSX {
+        + importAll(root: Path) : DataModel
+        + read(filePath: Path) : DataModel
+    }
+
+    ReaderXLSX ..> DataModel : creates
+    ReaderXLSX ..> Task : creates
+}
+
+' ===== ORCHESTRATOR =====
+package "org.example.orchestrator" {
+    enum ReportType {
+        REPORT_1
+        REPORT_2
+        REPORT_3
+        REPORT_4
+        REPORT_5
+    }
+
+    class InputLoader {
+        - command: String
+        - from: Date
+        - to: Date
+        - user: String
+        - path: Path
+        + {static} create(args: String[]) : InputLoader
+        + getCommand() : String
+        + getFrom() : Date
+        + getTo() : Date
+        + getUser() : String
+        + getPath() : Path
+    }
+
+    class Orchestrator {
+        - dataModel: DataModel
+        - inputLoader: InputLoader
+        + Orchestrator(dataModel: DataModel, inputLoader: InputLoader)
+        + controller() : void
+    }
+
+    Orchestrator --> DataModel : uses
+    Orchestrator --> InputLoader : uses
+    Orchestrator ..> ReportType : routes by
+}
+
+' ===== DISPLAY MODELS (DTOs) =====
+package "org.example.display.model" {
+    class Report0MetadataData <<record>> {
+        dateFrom: String
+        dateTo: String
+        minDate: String
+        maxDate: String
+        userCount: long
+        projectCount: long
+        taskCount: long
+        totalDuration: double
+        avgDurationPerUser: double
+        avgDurationPerProject: double
+    }
+
+    class Report1SumAllUsersData <<record>> {
+        dateFrom: String
+        dateTo: String
+        rows: List<Report1SumAllUsersRow>
+    }
+    class Report1SumAllUsersRow <<record>> {
+        userName: String
+        workingHours: double
+    }
+
+    class Report2SumAllProjectsData <<record>> {
+        dateFrom: String
+        dateTo: String
+        rows: List<Report2SumAllProjectsRow>
+    }
+    class Report2SumAllProjectsRow <<record>> {
+        projectName: String
+        workingHours: double
+    }
+
+    class Report3UsersAllProjectsData <<record>> {
+        dateFrom: String
+        dateTo: String
+        userID: String
+        rows: List<Report3UsersAllProjectsRow>
+    }
+    class Report3UsersAllProjectsRow <<record>> {
+        projectName: String
+        workingHours: double
+        percentageValue: double
+    }
+
+    class Report4Top10TasksData <<record>> {
+        dateFrom: String
+        dateTo: String
+        rows: List<Report4Top10TasksRow>
+    }
+    class Report4Top10TasksRow <<record>> {
+        rank: int
+        taskName: String
+        workingHours: double
+    }
+
+    class Report5UsersMaxTimeLoadData <<record>> {
+        dateFrom: String
+        dateTo: String
+        rows: List<Report5UsersMaxTimeLoadRow>
+    }
+    class Report5UsersMaxTimeLoadRow <<record>> {
+        rank: int
+        userName: String
+        workingHours: double
+    }
+
+    Report1SumAllUsersData "1" o-- "0..*" Report1SumAllUsersRow
+    Report2SumAllProjectsData "1" o-- "0..*" Report2SumAllProjectsRow
+    Report3UsersAllProjectsData "1" o-- "0..*" Report3UsersAllProjectsRow
+    Report4Top10TasksData "1" o-- "0..*" Report4Top10TasksRow
+    Report5UsersMaxTimeLoadData "1" o-- "0..*" Report5UsersMaxTimeLoadRow
+}
+
+' ===== REPORT (abstract) =====
+package "org.example.report" {
+    abstract class Report<T> {
+        # tasks: List<Task>
+        # dateFrom: Date
+        # dateTo: Date
+        # Report(data: DataModel, inputLoader: InputLoader)
+        + {abstract} generate() : T
+    }
+
+    class Report0Metadata {
+        - dataModel: DataModel
+        - inputLoader: InputLoader
+        + Report0Metadata(data: DataModel, inputLoader: InputLoader)
+        + generate() : Report0MetadataData
+    }
+
+    class Report1SumAllUsers {
+        - inputLoader: InputLoader
+        + Report1SumAllUsers(data: DataModel, inputLoader: InputLoader)
+        + generate() : Report1SumAllUsersData
+    }
+
+    class Report2SumAllProjects {
+        - data: DataModel
+        - inputLoader: InputLoader
+        + Report2SumAllProjects(data: DataModel, inputLoader: InputLoader)
+        + generate() : Report2SumAllProjectsData
+    }
+
+    class Report3UsersAllProjects {
+        - data: DataModel
+        - userID: String
+        - inputLoader: InputLoader
+        + Report3UsersAllProjects(data: DataModel, inputLoader: InputLoader)
+        + generate() : Report3UsersAllProjectsData
+    }
+
+    class Report4Top10Tasks {
+        - data: DataModel
+        - inputLoader: InputLoader
+        + Report4Top10Tasks(data: DataModel, inputLoader: InputLoader)
+        + generate() : Report4Top10TasksData
+    }
+
+    class Report5UsersMaxTimeLoad {
+        - data: DataModel
+        - inputLoader: InputLoader
+        + Report5UsersMaxTimeLoad(data: DataModel, inputLoader: InputLoader)
+        + generate() : Report5UsersMaxTimeLoadData
+    }
+
+    Report <|-- Report0Metadata
+    Report <|-- Report1SumAllUsers
+    Report <|-- Report2SumAllProjects
+    Report <|-- Report3UsersAllProjects
+    Report <|-- Report4Top10Tasks
+    Report <|-- Report5UsersMaxTimeLoad
+
+    Report0Metadata ..> Report0MetadataData : produces
+    Report1SumAllUsers ..> Report1SumAllUsersData : produces
+    Report2SumAllProjects ..> Report2SumAllProjectsData : produces
+    Report3UsersAllProjects ..> Report3UsersAllProjectsData : produces
+    Report4Top10Tasks ..> Report4Top10TasksData : produces
+    Report5UsersMaxTimeLoad ..> Report5UsersMaxTimeLoadData : produces
+}
+
+' ===== DISPLAY =====
+package "org.example.display" {
+    interface Displayer<T> {
+        + display(report: T) : void
+    }
+
+    class DisplayReport0Metadata {
+        + display(report: Report0MetadataData) : void
+    }
+
+    class DisplayReport1SumAllUsers {
+        + display(report: Report1SumAllUsersData) : void
+    }
+
+    class DisplayReport2SumAllProjects {
+        + display(report: Report2SumAllProjectsData) : void
+    }
+
+    class DisplayReport3UsersAllProjects {
+        + display(report: Report3UsersAllProjectsData) : void
+    }
+
+    class DisplayReport4Top10Tasks {
+        + display(report: Report4Top10TasksData) : void
+    }
+
+    class DisplayReport5UsersMaxTimeLoad {
+        + display(report: Report5UsersMaxTimeLoadData) : void
+    }
+
+    Displayer <|.. DisplayReport0Metadata
+    Displayer <|.. DisplayReport1SumAllUsers
+    Displayer <|.. DisplayReport2SumAllProjects
+    Displayer <|.. DisplayReport3UsersAllProjects
+    Displayer <|.. DisplayReport4Top10Tasks
+    Displayer <|.. DisplayReport5UsersMaxTimeLoad
+}
+
+' ===== EXPORT =====
+package "org.example.export" {
+    interface ExcelExporter<T> {
+        + export(report: T, workbook: Workbook) : void
+    }
+
+    class ExcelFileWriter {
+        + <T> write(fileName: String, reportData: T, exporter: ExcelExporter<T>) : void
+    }
+
+    class ReportExecutor {
+        - excelWriter: ExcelFileWriter
+        + execute(type: ReportType, data: DataModel, inputLoader: InputLoader) : void
+    }
+
+    class ExcelReport1SumAllUsers {
+        + export(report: Report1SumAllUsersData, workbook: Workbook) : void
+    }
+
+    class ExcelReport2SumAllProjects {
+        + export(report: Report2SumAllProjectsData, workbook: Workbook) : void
+    }
+
+    class ExcelReport3UsersAllProjects {
+        + export(report: Report3UsersAllProjectsData, workbook: Workbook) : void
+    }
+
+    class ExcelReport4Top10Tasks {
+        + export(report: Report4Top10TasksData, workbook: Workbook) : void
+    }
+
+    class ExcelReport5UsersMaxTimeLoad {
+        + export(report: Report5UsersMaxTimeLoadData, workbook: Workbook) : void
+    }
+
+    ExcelExporter <|.. ExcelReport1SumAllUsers
+    ExcelExporter <|.. ExcelReport2SumAllProjects
+    ExcelExporter <|.. ExcelReport3UsersAllProjects
+    ExcelExporter <|.. ExcelReport4Top10Tasks
+    ExcelExporter <|.. ExcelReport5UsersMaxTimeLoad
+
+    ReportExecutor --> ExcelFileWriter : uses
+    ReportExecutor --> ReportType : routes by
+    ReportExecutor --> DataModel : reads
+    ReportExecutor --> InputLoader : reads
+}
+
+' ===== CROSS-PACKAGE RELATIONS =====
+App --> ReaderXLSX : uses
+App --> InputLoader : creates via
+App --> Orchestrator : creates & calls
+Orchestrator --> ReportExecutor : delegates to
+ReportExecutor --> Report : instantiates subclass
+ReportExecutor --> Displayer : instantiates subclass
+ReportExecutor --> ExcelExporter : instantiates subclass
+ExcelFileWriter --> ExcelExporter : uses
+
+@enduml
