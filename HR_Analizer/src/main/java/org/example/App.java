@@ -6,6 +6,7 @@ import org.example.display.PrintReport2SumAllProjects;
 import org.example.display.model.Report1SumAllUsersRow;
 import org.example.display.model.Report2SumAllProjectsRow;
 import org.example.model.DataModel;
+import org.example.orchestrator.InputLoader;
 import org.example.orchestrator.Orchestrator;
 import org.example.reader.ReaderXLSX;
 
@@ -23,9 +24,9 @@ public class App {
         ReaderXLSX reader = new ReaderXLSX();
         DataModel data = reader.importAll(path);
 
+        InputLoader inputLoader = InputLoader.create(args);
 
-
-        Orchestrator orchestrator = new Orchestrator(data);
+        Orchestrator orchestrator = new Orchestrator(data,inputLoader);
         orchestrator.controller();
 
 
