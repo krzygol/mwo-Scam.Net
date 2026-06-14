@@ -21,6 +21,7 @@ String command = inputLoader.getCommand();
         this.inputLoader = inputLoader;
     }
 
+
     public void controller(){
 
         System.out.println("TEST PROGRAMU!!");
