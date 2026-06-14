@@ -2,8 +2,10 @@ package org.example.export;
 
 import org.example.display.DisplayReport1SumAllUsers;
 import org.example.display.DisplayReport2SumAllProjects;
+import org.example.display.DisplayReport3UsersAllProjects;
 import org.example.display.model.Report1SumAllUsersData;
 import org.example.display.model.Report2SumAllProjectsData;
+import org.example.display.model.Report3UsersAllProjectsData;
 import org.example.model.DataModel;
 import org.example.orchestrator.InputLoader;
 import org.example.orchestrator.ReportType;
@@ -49,24 +51,24 @@ public class ReportExecutor {
                         new ExcelReport2SumAllProjects()
                 );
             }
-//
-//            case REPORT_3 -> {
-//
-//                Report3UsersAllProjectsData report =
-//                        new Report3UsersAllProjects(
-//                                data,
-//                                inputLoader.getUserId())
-//                                .generate();
-//
-//                new PrintReport3UsersAllProjects().print(report);
-//
-//                excelWriter.write(
-//                        "report3.xlsx",
-//                        report,
-//                        new ExcelReport3UsersAllProjects()
-//                );
-//            }
-//
+
+            case REPORT_3 -> {
+
+                Report3UsersAllProjectsData report =
+                        new Report3UsersAllProjects(
+                                data,
+                                inputLoader)
+                                .generate();
+
+                new DisplayReport3UsersAllProjects().display(report);
+
+                excelWriter.write(
+                        "report3.xlsx",
+                        report,
+                        new ExcelReport3UsersAllProjects()
+                );
+            }
+
 //            case REPORT_4 -> {
 //
 //                Report4Top10TasksData report =

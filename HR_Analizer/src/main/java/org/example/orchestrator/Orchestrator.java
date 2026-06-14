@@ -15,8 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static org.example.orchestrator.ReportType.REPORT_1;
-import static org.example.orchestrator.ReportType.REPORT_2;
+import static org.example.orchestrator.ReportType.*;
 
 public class Orchestrator {
 
@@ -51,16 +50,18 @@ public class Orchestrator {
                         dataModel,
                         inputLoader
                 );
-
-//                Report2SumAllProjectsData reportData = new Report2SumAllProjects(dataModel, inputLoader).generate();
-//                Displayer<Report2SumAllProjectsData> printer2 = new DisplayReport2SumAllProjects();
-//                printer2.display(reportData);
                 break;
 
             case "Report3UsersAllProjects":
-                Report3UsersAllProjectsData reportData3 = new Report3UsersAllProjects(dataModel, inputLoader).generate();
-                Displayer<Report3UsersAllProjectsData> printer3 = new DisplayReport3UsersAllProjects();
-                printer3.display(reportData3);
+                new ReportExecutor().execute(
+                        REPORT_3,
+                        dataModel,
+                        inputLoader
+                );
+
+//                Report3UsersAllProjectsData reportData3 = new Report3UsersAllProjects(dataModel, inputLoader).generate();
+//                Displayer<Report3UsersAllProjectsData> printer3 = new DisplayReport3UsersAllProjects();
+//                printer3.display(reportData3);
                 break;
 
             case "Report4Top10Tasks":
